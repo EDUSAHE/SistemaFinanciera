@@ -1,0 +1,1 @@
+En este paquete iran todas las clases necesarias para conectar a la base de datos con el sistema(Nada de controllers, puros services para poder acceder a ellos).
