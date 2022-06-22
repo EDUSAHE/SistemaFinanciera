@@ -15,7 +15,7 @@ public class Usuario {
     String apellidoM;
     String usuario;
     String password;
-
+    String horario;
     //Constructor vacio
     public Usuario(){
         this.nombre = "";
@@ -23,15 +23,17 @@ public class Usuario {
         this.apellidoM = "";
         this.usuario = "";
         this.password = "";
+        this.horario="";
     }
 
     //Constructor sobrecargado con todos los campos
-    public Usuario(String nombreNuevo, String apellidoPNuevo, String apellidoMNuevo, String usuarioNuevo, String passwordNuevo){
+    public Usuario(String nombreNuevo, String apellidoPNuevo, String apellidoMNuevo, String usuarioNuevo, String passwordNuevo,String horario){
         this.nombre = nombreNuevo;
         this.apellidoP = apellidoPNuevo;
         this.apellidoM = apellidoMNuevo;
         this.usuario = usuarioNuevo;
         this.password = passwordNuevo;
+        this.horario=horario;
     }
 
     public String getNombre() {
@@ -72,5 +74,12 @@ public class Usuario {
 
     public void setPassword(String Password) {
         this.password = Password;
+    }
+      public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String Horario) {
+        this.horario = Horario;
     }
 }
