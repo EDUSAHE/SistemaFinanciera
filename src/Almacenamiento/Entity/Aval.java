@@ -17,6 +17,27 @@ public class Aval {
   String TelefonoCasa;
   String DireccionEmpleo; 
   String Referencia; 
+  
+    public Aval(){
+        this.Nombre = "";
+        this.ApellidosP = "";
+        this.ApellidoM = "";
+        this.Direccion = "";
+        this.TelefonoCelular = "";
+        this.TelefonoCasa = "";
+        this.DireccionEmpleo = "";
+        this.Referencia = "";
+    }
+    public Aval(String nombre, String apellidoPat, String apellidoMat, String direccion, String telefonoCelular, String telefonoCasa, String direccionEmpleo, String referencia){
+        this.Nombre = nombre;
+        this.ApellidosP = apellidoPat;
+        this.ApellidoM = apellidoMat;
+        this.Direccion = direccion;
+        this.TelefonoCelular = telefonoCelular;
+        this.TelefonoCasa = telefonoCasa;
+        this.DireccionEmpleo = direccionEmpleo;
+        this.Referencia = referencia;
+    }
 
     public String getNombre() {
         return Nombre;
