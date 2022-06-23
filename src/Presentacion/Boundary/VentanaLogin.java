@@ -8,6 +8,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 /**
  *
@@ -15,6 +16,7 @@ import javax.swing.JDialog;
  */
 public class VentanaLogin extends javax.swing.JFrame {
     private int prueba = 1;
+    private final JFrame estaVentana = this;
     
     /**
      * Creates new form VentanaLogin
@@ -22,6 +24,8 @@ public class VentanaLogin extends javax.swing.JFrame {
     public VentanaLogin() {
         super("Iniciar Sesión");
         MostrarFormularioInicioSesion();
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
     }
 
     /**

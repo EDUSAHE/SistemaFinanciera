@@ -4,17 +4,21 @@
  */
 package Presentacion.Boundary;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author nobls
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-
+    private final JFrame estaVentana = this;
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
         super("Creditos Financiera");
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
         initComponents();
     }
 

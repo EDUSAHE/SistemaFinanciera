@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPasswordField;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -28,11 +29,16 @@ import javax.swing.JTextArea;
  */
 public class VentanaEmpleados extends javax.swing.JFrame {
     private GridBagConstraints gridB = new GridBagConstraints();
+    private final JFrame estaVentana = this;
     /**
      * Creates new form VentanaEmpleados
      */
     public VentanaEmpleados() {
+        super("Empleados");
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
         MostrarListadoEmpleados();
+
     }
 
     /**
