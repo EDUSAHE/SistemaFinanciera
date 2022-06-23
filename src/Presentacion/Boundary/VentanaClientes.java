@@ -239,7 +239,7 @@ public class VentanaClientes extends javax.swing.JFrame {
 //        });
 
         if(modalCliente.getDefaultCloseOperation() == 2){
-            MostrarAlertaCancelacion();
+            MostrarCancelarCliente();
         }
         modalCliente.add(subirCliente);
         modalCliente.setVisible(true);
