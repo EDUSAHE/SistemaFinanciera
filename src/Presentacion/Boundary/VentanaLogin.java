@@ -4,6 +4,7 @@
  */
 package Presentacion.Boundary;
 
+import Almacenamiento.Boundary.*;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -15,8 +16,11 @@ import javax.swing.JFrame;
  * @author nobls
  */
 public class VentanaLogin extends javax.swing.JFrame {
-    private int prueba = 1;
+    private int prueba = 0;
+    public static int idUsuario=-1;
+    public static String datos="brandon";
     private final JFrame estaVentana = this;
+    private Boundary boundary = new Boundary();
     
     /**
      * Creates new form VentanaLogin
@@ -111,14 +115,17 @@ public class VentanaLogin extends javax.swing.JFrame {
 
     private void botonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLoginActionPerformed
         //Obtenemos los textos y lo enviamos a la función del login
-        /*
-            usuarioTemp = textUsuario.getText();
-            contraseñaTemp = fieldContra.getPassword();
-        */
+        
+          String  usuarioTemp = textUsuario.getText();
+          String contraseñaTemp = fieldContra.getText();
+           prueba= boundary.Login(usuarioTemp,contraseñaTemp);
         
         //Se lo mandamos a la función EnviarDatosUsuario
         //Si es verdadero manda a llamar a la ventana de Home
-        if(prueba == 1){         
+        if(prueba !=-1){    
+            idUsuario=prueba;
+            System.out.println(idUsuario);
+             this.dispose();
             new VentanaPrincipal();
         }else{
             //Mandamos a mostrar la alerta de datos incorrectos

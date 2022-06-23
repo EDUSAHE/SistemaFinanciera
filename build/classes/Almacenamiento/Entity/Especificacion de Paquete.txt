@@ -1,0 +1,1 @@
+En este paquete iran todas las clases de tipo entity, como por ejemplo: cliente, credito, etc.
