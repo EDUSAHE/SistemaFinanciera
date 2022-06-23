@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -19,11 +20,14 @@ import javax.swing.JTextField;
  * @author nobls
  */
 public class VentanaClientes extends javax.swing.JFrame {
-
+    private final JFrame estaVentana = this;
     /**
      * Creates new form VentanaClientes
      */
     public VentanaClientes() {
+        super("Clientes");
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
         initComponents();
     }
 
