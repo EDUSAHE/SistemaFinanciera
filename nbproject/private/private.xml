@@ -3,21 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Sistemas/DataBase/Conexion.java</file>
-            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Presentacion/Boundary/VentanaEmpleados.java</file>
+            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Almacenamiento/Entity/Deudor.java</file>
             <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/ReglasNegocio/Control/ControlInicioSesion.java</file>
-            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Presentacion/Boundary/VentanaClientes.java</file>
             <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Presentacion/Boundary/VentanaPrincipal.java</file>
             <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Presentacion/Boundary/VentanaLogin.java</file>
             <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Almacenamiento/Boundary/Boundary.java</file>
-            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/ReglasNegocio/Control/Especificacion%20de%20Paquete.txt</file>
-            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/ReglasNegocio/Control/ControlEmpleados.java</file>
-=======
-            <file>file:/C:/Users/nobls/Documents/GitHub/SistemaFinanciera/src/Presentacion/Boundary/VentanaEmpleados.java</file>
-            <file>file:/C:/Users/nobls/Documents/GitHub/SistemaFinanciera/src/Presentacion/Boundary/VentanaCreditos.java</file>
-            <file>file:/C:/Users/nobls/Documents/GitHub/SistemaFinanciera/src/Presentacion/Boundary/VentanaClientes.java</file>
->>>>>>> ecbc737d2f3ecab0a06805fecbf13d596c08543a
         </group>
     </open-files>
 </project-private>

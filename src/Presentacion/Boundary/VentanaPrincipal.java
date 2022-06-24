@@ -4,7 +4,7 @@
  */
 package Presentacion.Boundary;
 
-import Almacenamiento.Boundary.*;
+import ReglasNegocio.Control.*;
 import Almacenamiento.Entity.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -18,16 +18,16 @@ import javax.swing.JFrame;
 public class VentanaPrincipal extends javax.swing.JFrame {
    
     private final JFrame estaVentana = this;
-    public static int idUsuario =VentanaLogin.idUsuario;
+    private int idUsuario =VentanaLogin.idUsuario;
     private Usuario usuario = new Usuario();
-    private Boundary boundary=new Boundary();
+    private ControlInicioSesion controliniciosesion=new ControlInicioSesion();
+   
     
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
-     
-        super("Creditos Financiera");
+        super("Creditos Financiera");   
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         initComponents();
@@ -48,6 +48,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonClientes = new javax.swing.JButton();
         botonCreditos = new javax.swing.JButton();
         panelTabla = new javax.swing.JPanel();
+        NombreUsuario = new javax.swing.JLabel();
+        NombreUsuario1 = new javax.swing.JLabel();
+        NombreUsuario2 = new javax.swing.JLabel();
+        NombreUsuario3 = new javax.swing.JLabel();
+        NombreU = new javax.swing.JTextField();
+        Apellido = new javax.swing.JTextField();
+        Correo = new javax.swing.JTextField();
+        Horario = new javax.swing.JTextField();
         labelGenerales = new javax.swing.JLabel();
         botonPerfil = new javax.swing.JButton();
 
@@ -89,15 +97,75 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         panelTabla.setBorder(new javax.swing.border.MatteBorder(null));
 
+        NombreUsuario.setText("Nombre");
+
+        NombreUsuario1.setText("Apellido");
+
+        NombreUsuario2.setText("Horario");
+
+        NombreUsuario3.setText("Correo");
+
+        NombreU.setText("jTextField1");
+
+        Apellido.setText("jTextField2");
+
+        Correo.setText("jTextField3");
+        Correo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CorreoActionPerformed(evt);
+            }
+        });
+
+        Horario.setText("jTextField4");
+
         javax.swing.GroupLayout panelTablaLayout = new javax.swing.GroupLayout(panelTabla);
         panelTabla.setLayout(panelTablaLayout);
         panelTablaLayout.setHorizontalGroup(
             panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 371, Short.MAX_VALUE)
+            .addGroup(panelTablaLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelTablaLayout.createSequentialGroup()
+                        .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(NombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(NombreUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38)
+                        .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Apellido, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                            .addComponent(NombreU))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelTablaLayout.createSequentialGroup()
+                        .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(NombreUsuario3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(panelTablaLayout.createSequentialGroup()
+                                .addComponent(NombreUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 4, Short.MAX_VALUE)))
+                        .addGap(62, 62, 62)
+                        .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Correo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Horario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(28, Short.MAX_VALUE))))
         );
         panelTablaLayout.setVerticalGroup(
             panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 265, Short.MAX_VALUE)
+            .addGroup(panelTablaLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NombreU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NombreUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NombreUsuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(NombreUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Horario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         labelGenerales.setFont(new java.awt.Font("Rubik", 0, 14)); // NOI18N
@@ -126,7 +194,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(botonClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addGap(75, 75, 75))
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(logoEmpresa)
@@ -158,15 +226,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGap(61, 61, 61)
                         .addComponent(botonCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEmpleadosActionPerformed
-        // TODO add your handling code here
-        
+            try {
+            // TODO add your handling code here
+            usuario = controliniciosesion.ObtenerInformacionUsuario(idUsuario);
+            System.out.println(usuario.getNombre());
+            System.out.println(usuario.getApellidoP());
+            System.out.println(usuario.getUsuario());
+            System.out.println(usuario.getHorario());
+            NombreU.setText(usuario.getNombre());
+            Apellido.setText(usuario.getApellidoP());
+            Correo.setText(usuario.getUsuario());
+            Horario.setText(usuario.getHorario());
+        } catch (SQLException ex) {
+            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
       
     }//GEN-LAST:event_botonEmpleadosActionPerformed
 
@@ -182,6 +262,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void botonPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPerfilActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonPerfilActionPerformed
+
+    private void CorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CorreoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,7 +297,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               
+
                // new VentanaPrincipal().setVisible(true);
                 
             }
@@ -221,6 +305,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Apellido;
+    private javax.swing.JTextField Correo;
+    private javax.swing.JTextField Horario;
+    private javax.swing.JTextField NombreU;
+    private javax.swing.JLabel NombreUsuario;
+    private javax.swing.JLabel NombreUsuario1;
+    private javax.swing.JLabel NombreUsuario2;
+    private javax.swing.JLabel NombreUsuario3;
     private javax.swing.JButton botonClientes;
     private javax.swing.JButton botonCreditos;
     private javax.swing.JButton botonEmpleados;
