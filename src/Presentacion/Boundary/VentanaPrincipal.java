@@ -18,7 +18,7 @@ import javax.swing.JFrame;
 public class VentanaPrincipal extends javax.swing.JFrame {
    
     private final JFrame estaVentana = this;
-    private int idUsuario = VentanaLogin.idUsuario;
+    public int idUsuario = VentanaLogin.idUsuario;
     private Usuario usuario = new Usuario();
     private ControlInicioSesion controliniciosesion=new ControlInicioSesion();
    
@@ -57,8 +57,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         NombreU = new javax.swing.JTextField(usuario.getNombre());
         Apellido = new javax.swing.JTextField(usuario.getApellidoP() + usuario.getApellidoM());
         Correo = new javax.swing.JTextField(usuario.getUsuario());
-        Horario = new javax.swing.JTextField(usuario.getUsuario());
         labelGenerales = new javax.swing.JLabel();
+        Horario1 = new javax.swing.JTextField(usuario.getUsuario());
         botonPerfil = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -134,11 +134,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(NombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(NombreUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(Horario, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Correo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Correo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Apellido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NombreU, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NombreU, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Horario1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28))
             .addGroup(panelTablaLayout.createSequentialGroup()
                 .addGap(95, 95, 95)
@@ -165,7 +164,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NombreUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Horario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Horario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
 
@@ -266,7 +265,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             NombreU.setText(usuario.getNombre());
             Apellido.setText(usuario.getApellidoP());
             Correo.setText(usuario.getUsuario());
-            Horario.setText(usuario.getHorario());
+            Horario1.setText(usuario.getHorario());
         } catch (SQLException ex) {
             Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -310,7 +309,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Apellido;
     private javax.swing.JTextField Correo;
-    private javax.swing.JTextField Horario;
+    private javax.swing.JTextField Horario1;
     private javax.swing.JTextField NombreU;
     private javax.swing.JLabel NombreUsuario;
     private javax.swing.JLabel NombreUsuario1;

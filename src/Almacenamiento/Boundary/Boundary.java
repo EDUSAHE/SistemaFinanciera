@@ -434,6 +434,8 @@ public class Boundary {
             UsuarioR.setApellidoP(Usuario.getString("ApellidoP"));
             UsuarioR.setUsuario(Usuario.getString("Usuario"));   
             UsuarioR.setHorario(Usuario.getString("Horario"));
+            UsuarioR.setApellidoM(Usuario.getString("ApellidoM"));
+            UsuarioR.setPassword(Usuario.getString("Password"));
             
         }
       

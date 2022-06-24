@@ -20,6 +20,11 @@ public class ControlInicioSesion {
            return 0;
        }
     
+        public int  ActualizarUsuario(int IdUsuario,int IdTIpoUsuario,String Nombre,String ApellidoP,String ApellidoM,String Usuario,String Password,String Horario){
+            int resultado;
+            resultado=API.ActualizarUsuario(IdUsuario, IdTIpoUsuario, Nombre, ApellidoP, ApellidoM, Usuario, Password, Horario);
+            return resultado;
+        }
         //Retorna id del Usuario
        public int verificarDatosInicio(String usarname,String password){
            int resultado;

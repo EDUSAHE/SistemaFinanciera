@@ -5,6 +5,11 @@
 package Presentacion.Boundary;
 
 import Almacenamiento.Entity.Usuario;
+import ReglasNegocio.Control.ControlClientes;
+import ReglasNegocio.Control.ControlInicioSesion;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -16,6 +21,9 @@ import javax.swing.JOptionPane;
 public class VentanaPerfil extends javax.swing.JFrame {
     private Usuario usuarioTemp = new Usuario();
     private final JFrame estaVentana = this;
+     public int idUsuario = VentanaLogin.idUsuario;
+     private ControlInicioSesion API=new ControlInicioSesion();
+   
     /**
      * Creates new form VentanaPerfil
      */
@@ -25,8 +33,15 @@ public class VentanaPerfil extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
+        iniciar();
     }
 
+    
+    
+   
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,12 +59,14 @@ public class VentanaPerfil extends javax.swing.JFrame {
         labelApellidoPat = new javax.swing.JLabel();
         labelContraseña = new javax.swing.JLabel();
         labelApellidoMat = new javax.swing.JLabel();
-        fieldNombre = new javax.swing.JTextField();
-        fieldApellidoPat = new javax.swing.JTextField();
-        fieldApellidoMat = new javax.swing.JTextField();
-        fieldUsuario = new javax.swing.JTextField();
-        fieldContraseña = new javax.swing.JPasswordField();
         botonModificarDatos = new javax.swing.JButton();
+        NombreL = new javax.swing.JTextField();
+        ApellidoP = new javax.swing.JTextField();
+        ApellidoMl = new javax.swing.JTextField();
+        Usuariol = new javax.swing.JTextField();
+        Contrasenial = new javax.swing.JTextField();
+        Horario = new javax.swing.JLabel();
+        HorarioL = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -85,6 +102,30 @@ public class VentanaPerfil extends javax.swing.JFrame {
             }
         });
 
+        NombreL.setText("jTextField1");
+        NombreL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NombreLActionPerformed(evt);
+            }
+        });
+
+        ApellidoP.setText("jTextField1");
+        ApellidoP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApellidoPActionPerformed(evt);
+            }
+        });
+
+        ApellidoMl.setText("jTextField2");
+
+        Usuariol.setText("jTextField3");
+
+        Contrasenial.setText("jTextField4");
+
+        Horario.setText("Horario");
+
+        HorarioL.setText("jTextField1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -94,62 +135,71 @@ public class VentanaPerfil extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(labelApellidoPat)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(fieldApellidoPat, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(labelNombre)
-                                    .addGap(32, 32, 32)
-                                    .addComponent(fieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(labelApellidoMat)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(fieldApellidoMat, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(labelUsuario)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(labelContraseña)
-                                            .addGap(25, 25, 25)))
+                                            .addComponent(labelApellidoPat)
+                                            .addGap(115, 115, 115))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(labelApellidoMat)
+                                            .addGap(114, 114, 114)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(labelUsuario)
+                                        .addGap(139, 139, 139)))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(fieldUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                        .addComponent(fieldContraseña))))))
+                                        .addComponent(labelContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(Horario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGap(118, 118, 118)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(labelNombre)
+                                .addGap(123, 123, 123)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(NombreL, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                            .addComponent(ApellidoP)
+                            .addComponent(ApellidoMl)
+                            .addComponent(Usuariol)
+                            .addComponent(Contrasenial)
+                            .addComponent(HorarioL)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
+                        .addGap(145, 145, 145)
                         .addComponent(botonModificarDatos)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelNombre)
-                    .addComponent(fieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelApellidoPat)
-                    .addComponent(fieldApellidoPat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(labelNombre))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(NombreL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelApellidoPat)
+                    .addComponent(ApellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelApellidoMat)
-                    .addComponent(fieldApellidoMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                    .addComponent(ApellidoMl, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelUsuario)
-                    .addComponent(fieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Usuariol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelContraseña)
-                    .addComponent(fieldContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                    .addComponent(Contrasenial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Horario)
+                    .addComponent(HorarioL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(botonModificarDatos)
-                .addGap(23, 23, 23))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -162,7 +212,7 @@ public class VentanaPerfil extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(logoEmpresa)
-                        .addGap(36, 36, 36)
+                        .addGap(29, 29, 29)
                         .addComponent(labelGenerales)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -175,11 +225,11 @@ public class VentanaPerfil extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(logoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
+                        .addGap(43, 43, 43)
                         .addComponent(labelGenerales)))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(19, 19, 19))
+                .addGap(65, 65, 65))
         );
 
         pack();
@@ -190,21 +240,37 @@ public class VentanaPerfil extends javax.swing.JFrame {
         //BRANDON: Conectar a la base de datos, si dio error sale la alerta de error si no la de crea
         
         //Obtenemos los datos de los fields
-        usuarioTemp.setNombre(fieldNombre.getText());
-        usuarioTemp.setApellidoP(fieldApellidoPat.getText());
-        usuarioTemp.setApellidoM(fieldApellidoMat.getText());
-        usuarioTemp.setUsuario(fieldUsuario.getText());
-        usuarioTemp.setPassword(String.valueOf(fieldContraseña.getPassword()));
+//        usuarioTemp.setNombre(fieldNombre.getText());
+  //      usuarioTemp.setApellidoP(fieldApellidoPat.getText());
+     //   usuarioTemp.setApellidoM(fieldApellidoMat.getText());
+       // usuarioTemp.setUsuario(fieldUsuario.getText());
+        //usuarioTemp.setPassword(String.valueOf(fieldContraseña.getPassword()));
         
         //MANDAMOS A LA BASE DE DATOS
         //BRANDON: Haz la inserción dependiendo de si se pudo meter o no se pone la alerta
-        if(1 == 1){
+            NombreL.getText();
+            ApellidoP.getText();
+            ApellidoMl.getText();
+            Usuariol.getText();
+            Contrasenial.getText();
+            HorarioL.getText();
+            System.out.println(   NombreL.getText());
+        
+        if(API.ActualizarUsuario(idUsuario, idUsuario,  NombreL.getText(), ApellidoP.getText(),   ApellidoMl.getText(),   Usuariol.getText(),  Contrasenial.getText(), HorarioL.getText())== 1){
             MostrarModificacionDatos();
         }else{
             MostrarErrorModificacion();
         }
         
     }//GEN-LAST:event_botonModificarDatosActionPerformed
+
+    private void NombreLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombreLActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NombreLActionPerformed
+
+    private void ApellidoPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApellidoPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ApellidoPActionPerformed
 
     private void MostrarModificacionDatos(){
         String textoAlerta = "Sus datos fueron modificados correctamente";
@@ -221,6 +287,22 @@ public class VentanaPerfil extends javax.swing.JFrame {
         JDialog modalAlerta = alertaError.createDialog("Error al modificar sus datos");
         modalAlerta.setAlwaysOnTop(true);
         modalAlerta.setVisible(true);
+    }
+      public void iniciar(){
+       try {
+           // TODO add your handling code here
+           Usuario usuario = API.ObtenerInformacionUsuario(idUsuario);
+            NombreL.setText(usuario.getNombre());
+            ApellidoP.setText(usuario.getApellidoP());
+            ApellidoMl.setText(usuario.getApellidoM());
+            Usuariol.setText(usuario.getUsuario());
+            Contrasenial.setText(usuario.getPassword());
+            HorarioL.setText(usuario.getHorario());
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     /**
      * @param args the command line arguments
@@ -258,12 +340,14 @@ public class VentanaPerfil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField ApellidoMl;
+    private javax.swing.JTextField ApellidoP;
+    private javax.swing.JTextField Contrasenial;
+    private javax.swing.JLabel Horario;
+    private javax.swing.JTextField HorarioL;
+    private javax.swing.JTextField NombreL;
+    private javax.swing.JTextField Usuariol;
     private javax.swing.JButton botonModificarDatos;
-    private javax.swing.JTextField fieldApellidoMat;
-    private javax.swing.JTextField fieldApellidoPat;
-    private javax.swing.JPasswordField fieldContraseña;
-    private javax.swing.JTextField fieldNombre;
-    private javax.swing.JTextField fieldUsuario;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelApellidoMat;
     private javax.swing.JLabel labelApellidoPat;

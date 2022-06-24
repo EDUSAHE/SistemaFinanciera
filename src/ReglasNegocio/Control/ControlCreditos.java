@@ -15,8 +15,8 @@ import java.sql.ResultSet;
 public class ControlCreditos {
     private Boundary API = new Boundary();
        
-       public int addCredito(int IdCredito,int IdModalidad,float TotalPrestamo,float Restante){
-        return API.InsertarCredito(IdCredito, IdModalidad, TotalPrestamo, Restante);
+       public int addCredito(int IdCliente,int IdModalidad,float TotalPrestamo,float Restante){
+        return API.InsertarCredito(IdCliente, IdModalidad, TotalPrestamo, Restante);
     }
     
     public Credito ObtenerDatosCredito(int IdCredito) throws SQLException{

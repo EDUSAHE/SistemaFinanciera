@@ -4,6 +4,7 @@
  */
 package Presentacion.Boundary;
 
+import ReglasNegocio.Control.*;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -31,6 +32,8 @@ public class VentanaCreditos extends javax.swing.JFrame {
     private final JFrame estaVentana = this;
     private GridBagConstraints gbc = new GridBagConstraints();
     private int contador = 0;
+    ControlCreditos API = new ControlCreditos();
+    
     /**
      * Creates new form VentanaCreditos
      */
@@ -221,6 +224,14 @@ public class VentanaCreditos extends javax.swing.JFrame {
         resultado.add(auxiliarPago);
         resultado.add(auxiliarModalidad);
         resultado.add(auxiliarPlazo);
+        
+        if(API.addCredito(SOMEBITS, ICONIFIED, TOP_ALIGNMENT, LEFT_ALIGNMENT)==1){
+        
+        }else{
+        
+        
+        }
+        
         
         
         return resultado;

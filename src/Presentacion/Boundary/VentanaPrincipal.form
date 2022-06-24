@@ -162,12 +162,10 @@
                       <Component id="NombreUsuario1" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                          <Component id="Horario" min="-2" pref="157" max="-2" attributes="0"/>
-                          <Component id="Correo" alignment="1" min="-2" pref="157" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="Correo" alignment="1" min="-2" pref="157" max="-2" attributes="0"/>
                       <Component id="Apellido" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
                       <Component id="NombreU" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
+                      <Component id="Horario1" alignment="1" min="-2" pref="157" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
@@ -201,7 +199,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="NombreUsuario2" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="Horario" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Horario1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="60" max="32767" attributes="0"/>
               </Group>
@@ -247,11 +245,6 @@
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField(usuario.getUsuario())"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="Horario">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField(usuario.getUsuario())"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JLabel" name="labelGenerales">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -260,6 +253,11 @@
             <Property name="text" type="java.lang.String" value="Datos Generales"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="Horario1">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField(usuario.getUsuario())"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
