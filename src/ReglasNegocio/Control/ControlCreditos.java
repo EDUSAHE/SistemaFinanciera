@@ -15,19 +15,18 @@ import java.sql.ResultSet;
 public class ControlCreditos {
     private Boundary API = new Boundary();
        
-       public int addCredito(int IdMulta,int IdPago,int IdModalidad,float TotalPrestamo,float Restante){
-        return API.InsertarDeuda(IdMulta, IdPago, IdModalidad, TotalPrestamo, Restante);
+       public int addCredito(int IdDeudor,int IdModalidad,float TotalPrestamo,float Restante){
+        return API.InsertarDeuda(IdDeudor, IdModalidad, TotalPrestamo, Restante);
     }
     
     public Deuda ObtenerDatosCredito(int IdDeuda) throws SQLException{
         Deuda DatosCredito = new Deuda();
-        DatosCredito.seIdDeuda(IdDeuda);
-       DatosCredito = API.ListOneDeuda(DatosCredito.getIdDeuda());
+       DatosCredito = API.ListOneDeuda(IdDeuda);
        return DatosCredito;
     }
     
-    public int ActualizarCredito(Deuda DatosActualizados){
-        return API.ActualizarDeuda(DatosActualizados.getIdDeuda(), DatosActualizados.getIdmulta(), DatosActualizados.getIdPago(), DatosActualizados.getIdModalidad(), DatosActualizados.getTotalPrestamo(), DatosActualizados.getRestante());
+    public int ActualizarCredito(int IdDeudor,int IdModalidad,float TotalPrestamo,float Restante){
+        return API.ActualizarDeuda(IdDeudor, IdDeudor, IdModalidad, TotalPrestamo, Restante);
     }
     
     public ResultSet ObtenerCreditosCliente(int idDeudor){

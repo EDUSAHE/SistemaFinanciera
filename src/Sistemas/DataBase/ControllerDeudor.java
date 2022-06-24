@@ -65,22 +65,20 @@ public class ControllerDeudor {
        
        
         //Crear Deudor con el metodo POST
-        public  int CrearDeudor(int IdAval,int IdDeuda,String Nombre,String ApellidoP,String ApellidoM,String Direccion,String Telefono,String DireccionEmpleado,String Referencia){
+        public  int CrearDeudor(String Nombre,String ApellidoP,String ApellidoM,String Direccion,String Telefono,String DireccionEmpleado,String Referencia){
             Conexion conexion =new Conexion();
             Connection con =  conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement("INSERT INTO DEUDOR (IdAval,IdDeuda,Nombre,ApellidoP,ApellidoM,Direccion,Telefono,DireccionEmpleado,Referencia) VALUES(?,?,?,?,?,?,?,?,?)");
-               ps.setInt(1,IdAval);
-               ps.setInt(2,IdDeuda);
-               ps.setString(3,Nombre);
-               ps.setString(4,ApellidoP);
-               ps.setString(5,ApellidoM);
-               ps.setString(6,Direccion);
-               ps.setString(7,Telefono);
-               ps.setString(8,DireccionEmpleado);
-               ps.setString(9,Referencia);
+               PreparedStatement ps= con.prepareStatement("INSERT INTO DEUDOR (Nombre,ApellidoP,ApellidoM,Direccion,Telefono,DireccionEmpleado,Referencia) VALUES(?,?,?,?,?,?,?)");
+               ps.setString(1,Nombre);
+               ps.setString(2,ApellidoP);
+               ps.setString(3,ApellidoM);
+               ps.setString(4,Direccion);
+               ps.setString(5,Telefono);
+               ps.setString(6,DireccionEmpleado);
+               ps.setString(6,Referencia);
               
                int res=ps.executeUpdate();
                
@@ -145,23 +143,21 @@ public class ControllerDeudor {
        
      
        //Actualizar Deudor con el metodo UPDAte
-        public  int ActualizarDeudor(int IdDeudor,int IdAval,int IdDeuda,String Nombre,String ApellidoP,String ApellidoM,String Direccion,String Telefono,String DireccionEmpleado,String Referencia){
+        public  int ActualizarDeudor(String Nombre,String ApellidoP,String ApellidoM,String Direccion,String Telefono,String DireccionEmpleado,String Referencia,int IdDeudor){
             Conexion conexion =new Conexion();
             Connection con =  conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement("UPDATE  DEUDOR set IdAval=?,IdDeuda=?,Nombre=?,ApellidoP=?,ApellidoM=?,Direccion=?,Telefono=?,DireccionEmpleado=?,Referencia=? WHERE IdDeudor =? ");
-               ps.setInt(1,IdAval);
-               ps.setInt(2,IdDeuda);
-               ps.setString(3,Nombre);
-               ps.setString(4,ApellidoP);
-               ps.setString(5,ApellidoM);
-               ps.setString(6,Direccion);
-               ps.setString(7,Telefono);
-               ps.setString(8,DireccionEmpleado);
-               ps.setString(9,Referencia);
-               ps.setInt(10, IdAval);
+               PreparedStatement ps= con.prepareStatement("UPDATE  DEUDOR set Nombre=?,ApellidoP=?,ApellidoM=?,Direccion=?,Telefono=?,DireccionEmpleado=?,Referencia=? WHERE IdDeudor =? ");
+               ps.setString(1,Nombre);
+               ps.setString(2,ApellidoP);
+               ps.setString(3,ApellidoM);
+               ps.setString(4,Direccion);
+               ps.setString(5,Telefono);
+               ps.setString(6,DireccionEmpleado);
+               ps.setString(7,Referencia);
+               ps.setInt(8, IdDeudor);
               
                int res=ps.executeUpdate();
                

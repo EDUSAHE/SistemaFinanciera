@@ -68,18 +68,17 @@ public class ControllerDeuda {
        }
        
        //Crear Deuda con el metodo POST
-        public  int CrearDeuda(int IdMulta,int IdPago,int IdModalidad,float TotalPrestamo,float Restante){
+        public  int CrearDeuda(int IdDeudor,int IdModalidad,float TotalPrestamo,float Restante){
            Conexion conexion =new Conexion();
            Connection con =  conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement("INSERT INTO DEUDA (IdMulta,IdPago,IdModalidad,TotalPrestamo,Restante) VALUES(?,?,?,?,?)");
-               ps.setInt(1,IdMulta);
-               ps.setInt(2,IdPago);
-               ps.setFloat(3,IdModalidad);
-               ps.setFloat(4,TotalPrestamo);
-               ps.setFloat(5,Restante);
+               PreparedStatement ps= con.prepareStatement("INSERT INTO DEUDA (IdDeudor,IdModalidad,TotalPrestamo,Restante) VALUES(?,?,?,?)");
+               ps.setFloat(1,IdDeudor);
+               ps.setFloat(2,IdModalidad);
+               ps.setFloat(3,TotalPrestamo);
+               ps.setFloat(4,Restante);
                int res=ps.executeUpdate();
                
                if(res> 0){
@@ -146,19 +145,18 @@ public class ControllerDeuda {
        
        
        //Actualizar Deuda con el metodo Update
-        public  int ActualizarDeuda(int IdDeuda,int IdMulta,int IdPago,int IdModalidad,float TotalPrestamo,float Restante){
+        public  int ActualizarDeuda(int IdDeuda,int IdDeudor,int IdModalidad,float TotalPrestamo,float Restante){
            Conexion conexion =new Conexion();
            Connection con =  conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement("UPDATE DEUDA SET IdMulta=?,IdPago=?,IdModalidad=?,TotalPrestamo =?,Restante =?  WHERE IdDeuda=?");
-               ps.setInt(1,IdMulta);
-               ps.setInt(2,IdPago);
-               ps.setInt(3,IdModalidad);
-               ps.setFloat(4,TotalPrestamo);
-               ps.setFloat(5,Restante);
-               ps.setInt(6, IdDeuda);
+               PreparedStatement ps= con.prepareStatement("UPDATE DEUDA SET IdDeudor=?,IdModalidad=?,TotalPrestamo =?,Restante =?  WHERE IdDeuda=?");
+                ps.setInt(1,IdDeudor);
+               ps.setInt(2,IdModalidad);
+               ps.setFloat(3,TotalPrestamo);
+               ps.setFloat(4,Restante);
+               ps.setInt(5, IdDeuda);
                int res=ps.executeUpdate();
                
                if(res> 0){

@@ -18,9 +18,9 @@ public class Boundary {
     
     
     //CREA UN NUEVO AVAL  (Retorno: si  fue eliminado con exito=1  de lo contrario = 0)
-    public  ResultSet InsertarAval(String Nombre,String ApellidosP,String ApellidoM,String Direccion,String TelefonoCelular,String TelefonoCasa,String DireccionEmpleo,String Referencia){
+    public  ResultSet InsertarAval(int IdDeudor,String Nombre,String ApellidosP,String ApellidoM,String Direccion,String TelefonoCelular,String TelefonoCasa,String DireccionEmpleo,String Referencia){
                 ControllerAval nuevo = new ControllerAval();
-                nuevo.CrearAval(Nombre, ApellidosP, ApellidoM, Direccion, TelefonoCelular, TelefonoCasa, DireccionEmpleo, Referencia);
+                nuevo.CrearAval(IdDeudor, Nombre, ApellidosP, ApellidoM, Direccion, TelefonoCelular, TelefonoCasa, DireccionEmpleo, Referencia);
                 return null;       
     }
     
@@ -34,10 +34,10 @@ public class Boundary {
     }
     
     //ACTUALIZAR AVAL   (Retorno: si  fue actualizado con exito=1  de lo contrario = 0)
-    public int ActualizarAval(int idAval,String Nombre,String ApellidosP,String ApellidoM,String Direccion,String TelefonoCelular,String TelefonoCasa,String DireccionEmpleo,String Referencia){
+    public int ActualizarAval(int IdDeudor,int idAval,String Nombre,String ApellidosP,String ApellidoM,String Direccion,String TelefonoCelular,String TelefonoCasa,String DireccionEmpleo,String Referencia){
         int resultado;
         ControllerAval nuevo = new ControllerAval();
-        resultado=nuevo.ActualizarAval(idAval,Nombre, ApellidosP, ApellidoM, Direccion, TelefonoCelular, TelefonoCasa, DireccionEmpleo, Referencia);
+        resultado=nuevo.ActualizarAval(idAval, IdDeudor, Nombre, ApellidosP, ApellidoM, Direccion, TelefonoCelular, TelefonoCasa, DireccionEmpleo, Referencia);
         return resultado;
     }
     
@@ -48,6 +48,7 @@ public class Boundary {
         ControllerAval nuevo = new ControllerAval();
         AvalR=nuevo.ConsultarAval(idAval);
         while(AvalR.next()){
+             AvalResultado.setIdDeudor(AvalR.getInt("IdDeudor"));
               AvalResultado.setNombre(AvalR.getString("Nombre"));
               AvalResultado.setApellidosP(AvalR.getString("ApellidosP"));
               AvalResultado.setApellidoM(AvalR.getString("ApellidoM"));
@@ -78,10 +79,10 @@ public class Boundary {
     
         
     //CREA UN NUEVO DEUDA   (Retorno: si  fue eliminado con exito=1  de lo contrario = 0)
-    public  int InsertarDeuda(int IdMulta,int IdPago,int IdModalidad,float TotalPrestamo,float Restante){
+    public  int InsertarDeuda(int IdDeudor,int IdModalidad,float TotalPrestamo,float Restante){
         int resultado;
         ControllerDeuda nuevo=new ControllerDeuda();
-        resultado=nuevo.CrearDeuda(IdMulta, IdPago, IdModalidad, TotalPrestamo, Restante);
+        resultado=nuevo.CrearDeuda(IdDeudor, IdModalidad, TotalPrestamo, Restante);
          
         return resultado;       
     }
@@ -95,10 +96,10 @@ public class Boundary {
     }
     
     //ACTUALIZAR DEUDA   (Retorno: si  fue actualizado con exito=1  de lo contrario = 0)
-    public int ActualizarDeuda(int IdDeuda,int IdMulta,int IdPago,int IdModalidad,float TotalPrestamo,float Restante){
+    public int ActualizarDeuda(int IdDeuda,int IdDeudor,int IdModalidad,float TotalPrestamo,float Restante){
         int resultado;
         ControllerDeuda nuevo = new ControllerDeuda();
-        resultado =nuevo.ActualizarDeuda(IdDeuda, IdMulta, IdPago, IdModalidad, TotalPrestamo, Restante);
+        resultado =nuevo.ActualizarDeuda(IdDeuda, IdDeudor, IdModalidad, TotalPrestamo, Restante);
         return resultado;
     }
     
@@ -109,8 +110,9 @@ public class Boundary {
         ControllerDeuda nuevo= new ControllerDeuda();
         Deuda=nuevo.ListOneDeuda(idAval);
         while(Deuda.next()){
-              DeudaR.setIdmulta(Deuda.getInt("Idmulta"));
-              DeudaR.setIdPago(Deuda.getInt("IdPago"));
+                          
+              DeudaR.setIdDeuda(Deuda.getInt("IdDeuda"));
+              DeudaR.setIdDeudor(Deuda.getInt("IdDeudor"));
               DeudaR.setIdModalidad(Deuda.getInt("IdModalidad"));
               DeudaR.setTotalPrestamo(Deuda.getFloat("TotalPrestamo"));
               DeudaR.setRestante(Deuda.getFloat("Restante"));
@@ -131,10 +133,10 @@ public class Boundary {
 
             
     //CREA UN NUEVO DEUDOR   (Retorno: si  fue eliminado con exito=1  de lo contrario = 0)
-    public  int InsertarDeudor(int IdAval,int IdDeuda,String Nombre,String ApellidoP,String ApellidoM,String Direccion,String Telefono,String DireccionEmpleado,String Referencia){
+    public  int InsertarDeudor(String Nombre,String ApellidoP,String ApellidoM,String Direccion,String Telefono,String DireccionEmpleado,String Referencia){
         int resultado;
         ControllerDeudor nuevo = new ControllerDeudor();
-        resultado = nuevo.CrearDeudor(IdAval, IdDeuda, Nombre, ApellidoP, ApellidoM, Direccion, Telefono, DireccionEmpleado, Referencia);
+        resultado = nuevo.CrearDeudor(Nombre, ApellidoP, ApellidoM, Direccion, Telefono, DireccionEmpleado, Referencia);
         return resultado;       
     }
     
@@ -147,10 +149,10 @@ public class Boundary {
     }
     
     //ACTUALIZAR DEUDOR  (Retorno: si  fue actualizado con exito=1  de lo contrario = 0)
-    public int ActualizarDeudor(int IdDeudor,int IdAval,int IdDeuda,String Nombre,String ApellidoP,String ApellidoM,String Direccion,String Telefono,String DireccionEmpleado,String Referencia){
+    public int ActualizarDeudor(int IdDeudor,String Nombre,String ApellidoP,String ApellidoM,String Direccion,String Telefono,String DireccionEmpleado,String Referencia){
        int resultado;
        ControllerDeudor nuevo = new ControllerDeudor();
-       resultado = nuevo.ActualizarDeudor(IdDeudor, IdAval, IdDeuda, Nombre, ApellidoP, ApellidoM, Direccion, Telefono, DireccionEmpleado, Referencia);
+       resultado = nuevo.ActualizarDeudor(Nombre, ApellidoP, ApellidoM, Direccion, Telefono, DireccionEmpleado, Referencia, IdDeudor);
         return resultado;
     }
     
@@ -161,10 +163,14 @@ public class Boundary {
        ResultSet Deudor;
        Deudor = nuevo.consultarDeudores();
            while(Deudor.next()){
-              DeudoresR.setIdAval(Deudor.getInt("IdAval"));
-              DeudoresR.setIdDeuda(Deudor.getInt("IdDeuda"));
               DeudoresR.setNombre(Deudor.getString("Nombre"));
               DeudoresR.setApellidoP(Deudor.getString("ApellidoP"));
+              DeudoresR.setApellidoM(Deudor.getString("ApellidoM"));
+              DeudoresR.setDireccion(Deudor.getString("Direccion"));
+              DeudoresR.setTelefono(Deudor.getString("Telefono"));
+              DeudoresR.setDireccionEmpleado(Deudor.getString("DireccionEmpleado"));
+              DeudoresR.setReferencia(Deudor.getString("Referencia"));
+              
 
         }
        
@@ -232,10 +238,10 @@ public class Boundary {
      //------------------------------------------------------------------------METODOS-MULTA--------------------------------------------------------------------------
                 
     //CREA UNA NUEVA MULTA   (Retorno: si  fue eliminado con exito=1  de lo contrario = 0)
-    public  int InsertarMulta(String Fecha,int Monto){
+    public  int InsertarMulta(int IdDeuda,String Fecha,int Monto){
         int resultado;
         ControllerMulta nuevo = new ControllerMulta();
-        resultado = nuevo.CrearMulta(Fecha, Monto);
+        resultado = nuevo.CrearMulta(IdDeuda, Fecha, Monto);
         return resultado;       
     }
     
@@ -248,10 +254,10 @@ public class Boundary {
     }
     
     //ACTUALIZAR MULTA  (Retorno: si  fue actualizado con exito=1  de lo contrario = 0)
-    public int ActualizarMulta(int IdMulta,String Fecha,int Monto){
+    public int ActualizarMulta(int IdDeuda,int IdMulta,String Fecha,int Monto){
         int resultado;
         ControllerMulta nuevo = new ControllerMulta();
-        resultado = nuevo.ActualizarMulta(IdMulta, Fecha, Monto);
+        resultado = nuevo.ActualizarMulta(IdMulta, IdDeuda, Fecha, Monto);
         return resultado;
     }
     
@@ -282,10 +288,10 @@ public class Boundary {
     //------------------------------------------------------------------------METODOS-PAGO--------------------------------------------------------------------------
     
     //CREA UN NUEVO PAGO  (Retorno: si  fue eliminado con exito=1  de lo contrario = 0)
-    public  int InsertarPago(String Fecha,int Monto){
+    public  int InsertarPago(int IdDeuda,String Fecha,int Monto){
         int resultado;
         ControllerPago nuevo =new ControllerPago();
-        resultado = nuevo.CrearPago(Fecha, Monto);
+        resultado = nuevo.CrearPago(IdDeuda, Fecha, Monto);
         return resultado;       
     }
     
@@ -298,10 +304,10 @@ public class Boundary {
     }
     
     //ACTUALIZAR PAGO  (Retorno: si  fue actualizado con exito=1  de lo contrario = 0)
-    public int ActualizarPago(int IdPago,String Fecha,int Monto){
+    public int ActualizarPago(int IdDeuda,int IdPago,String Fecha,int Monto){
         int resultado;
         ControllerPago nuevo = new ControllerPago();
-        resultado = nuevo.ActualizarPago(IdPago, Fecha, Monto);
+        resultado = nuevo.ActualizarPago(IdPago, IdDeuda, Fecha, Monto);
         return resultado;
     }
     
@@ -444,7 +450,7 @@ public class Boundary {
     public static void main(String[] args) throws SQLException {
         Boundary nuevo= new Boundary();
         ResultSet respuesta;
-        
+       
         //LOGIN
             //int id= nuevo.Login("brandon@gmail.com", "brandon");
             //System.out.println(id);
@@ -457,7 +463,16 @@ public class Boundary {
             //nuevo.InsertarMulta("12/10/12", 2);
             //nuevo.InsertarPago("12/4", 3);
             //nuevo.InsertarTipoUsuario("TipoUsuario");
-            //nuevo.InsertarUsuario(0, "brandon", "Ortiz", "Rojas", "brandon@gmail.com", "brandon","11:00am-5:00Pm");
+            //Usuario nuevoUsuario = new Usuario();
+            //nuevoUsuario.setNombre("Brandon");
+            //nuevoUsuario.setApellidoP("Ortiz");
+            //nuevoUsuario.setApellidoM("Rojas");
+            //nuevoUsuario.setUsuario("brandon@gmail.com");
+            //nuevoUsuario.setPassword("brandon");
+           // nuevoUsuario.setHorario("5:00am-5:00pm");
+            //nuevoUsuario.setIdTIpoUsuario(0);
+            
+            //nuevo.InsertarUsuario(nuevoUsuario);
         //ACTUALIZAR
             //nuevo.ActualizarAval(0, "ActualizarAval", "", "", "", "", "", "", "");
             //nuevo.ActualizarDeuda(3, 1, 1, 1, 1, 1);

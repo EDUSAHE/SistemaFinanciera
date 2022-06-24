@@ -9,34 +9,23 @@ package Almacenamiento.Entity;
  * @author bran
  */
 public class Aval {
-  String Nombre; 
-  String ApellidosP;
-  String ApellidoM; 
-  String Direccion; 
-  String TelefonoCelular;
-  String TelefonoCasa;
-  String DireccionEmpleo; 
-  String Referencia; 
+    int IdDeudor;
+    String Nombre; 
+    String ApellidosP;
+    String ApellidoM; 
+    String Direccion; 
+    String TelefonoCelular;
+    String TelefonoCasa;
+    String DireccionEmpleo; 
+    String Referencia; 
   
-    public Aval(){
-        this.Nombre = "";
-        this.ApellidosP = "";
-        this.ApellidoM = "";
-        this.Direccion = "";
-        this.TelefonoCelular = "";
-        this.TelefonoCasa = "";
-        this.DireccionEmpleo = "";
-        this.Referencia = "";
+
+    public int getIdDeudor() {
+        return IdDeudor;
     }
-    public Aval(String nombre, String apellidoPat, String apellidoMat, String direccion, String telefonoCelular, String telefonoCasa, String direccionEmpleo, String referencia){
-        this.Nombre = nombre;
-        this.ApellidosP = apellidoPat;
-        this.ApellidoM = apellidoMat;
-        this.Direccion = direccion;
-        this.TelefonoCelular = telefonoCelular;
-        this.TelefonoCasa = telefonoCasa;
-        this.DireccionEmpleo = direccionEmpleo;
-        this.Referencia = referencia;
+
+    public void setIdDeudor(int IdDeudor) {
+        this.IdDeudor = IdDeudor;
     }
 
     public String getNombre() {
@@ -75,8 +64,8 @@ public class Aval {
         return TelefonoCelular;
     }
 
-    public void setTelefonoCelular(String TelefonoCelularl) {
-        this.TelefonoCelular = TelefonoCelularl;
+    public void setTelefonoCelular(String TelefonoCelular) {
+        this.TelefonoCelular = TelefonoCelular;
     }
 
     public String getTelefonoCasa() {
@@ -102,8 +91,6 @@ public class Aval {
     public void setReferencia(String Referencia) {
         this.Referencia = Referencia;
     }
-
-   
 
 
     
