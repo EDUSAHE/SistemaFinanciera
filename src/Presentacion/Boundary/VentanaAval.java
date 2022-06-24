@@ -5,6 +5,8 @@
 package Presentacion.Boundary;
 
 import Almacenamiento.Entity.Aval;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -23,8 +25,16 @@ public class VentanaAval extends javax.swing.JFrame {
         super("Nuevo aval");
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setResizable(false);
         MostrarFormularioVacioAval();
+        this.addWindowListener(new WindowAdapter(){
+            public void WindowClosing(WindowEvent e){
+                if(MostrarCancelarAval() == JOptionPane.YES_OPTION){
+                    e.getWindow().dispose();
+                }
+            }
+        });
     }
 
     /**
@@ -255,12 +265,13 @@ public class VentanaAval extends javax.swing.JFrame {
         fieldReferencia.setText(avalModificar.getReferencia());
     }
 
-    private void MostrarCancelarAval(){
+    private int MostrarCancelarAval(){
         String textoAlerta = "¿Estas seguro de que quieres cancelar?";
         int resultadoOpcion;
         
         resultadoOpcion = JOptionPane.showConfirmDialog(null, textoAlerta , "Selecciona una opción", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         
+        return resultadoOpcion;
     }
     
     private void ConfirmacionCrearAval(){

@@ -13,6 +13,8 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
@@ -42,6 +44,7 @@ public class VentanaEmpleados extends javax.swing.JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         usuarioTemp.setNombre("Prueba");
         usuarioTemp.setApellidoP("Apellido");
         usuarioTemp.setApellidoM("Materno");
@@ -332,13 +335,13 @@ public class VentanaEmpleados extends javax.swing.JFrame {
         modalAlerta.setVisible(true);
     }
     
-    private void MostrarAlertaCancelacion() {
-        String textoAlerta = "¿Estas seguro de cancelar?";
-
-        JOptionPane alertaCancelado = new JOptionPane(textoAlerta,JOptionPane.QUESTION_MESSAGE,JOptionPane.YES_NO_OPTION);
-        JDialog modalAlerta = alertaCancelado.createDialog("Alerta cancelar");
-        modalAlerta.setAlwaysOnTop(true);
-        modalAlerta.setVisible(true);
+    private int MostrarAlertaCancelacion() {
+        String textoAlerta = "¿Estas seguro de que quieres cancelar?";
+        int resultadoOpcion;
+        
+        resultadoOpcion = JOptionPane.showConfirmDialog(null, textoAlerta , "Selecciona una opción", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        
+        return resultadoOpcion;
     }
 
     private int MostrarConfirmacionDeEliminacion() {
@@ -464,9 +467,14 @@ public class VentanaEmpleados extends javax.swing.JFrame {
 //            }
 //        });
 
-        if(modalFormulario.getDefaultCloseOperation() == 2){
-            MostrarAlertaCancelacion();
-        }
+        modalFormulario.addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e){               
+                if(MostrarAlertaCancelacion() == JOptionPane.YES_OPTION){
+                    e.getWindow().dispose();
+                }
+            }
+        });
         modalFormulario.add(subirEmpleado);
         modalFormulario.setVisible(true);
     } 

@@ -14,6 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -42,6 +44,7 @@ public class VentanaClientes extends javax.swing.JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         usuarioTemp.setNombre("Prueba");
         usuarioTemp.setApellidoP("Apellido");
         usuarioTemp.setApellidoM("Materno");
@@ -398,9 +401,14 @@ public class VentanaClientes extends javax.swing.JFrame {
 //            }
 //        });
 
-        if(modalCliente.getDefaultCloseOperation() == 2){
-            MostrarCancelarCliente();
-        }
+        modalCliente.addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e){                
+                if(MostrarCancelarCliente() == JOptionPane.YES_OPTION){
+                    e.getWindow().dispose();
+                }
+            }
+        });
         modalCliente.add(subirCliente);
         modalCliente.setVisible(true);
     }
@@ -502,13 +510,13 @@ public class VentanaClientes extends javax.swing.JFrame {
         modalCliente.setVisible(true);
     }
     
-    private void MostrarCancelarCliente(){
-        String textoAlerta = "¿Estas seguro de cancelar?";
-
-        JOptionPane alertaCancelado = new JOptionPane(textoAlerta,JOptionPane.QUESTION_MESSAGE,JOptionPane.YES_NO_OPTION);
-        JDialog modalAlerta = alertaCancelado.createDialog("Alerta cancelar");
-        modalAlerta.setAlwaysOnTop(true);
-        modalAlerta.setVisible(true);
+    private int MostrarCancelarCliente(){
+        String textoAlerta = "¿Estas seguro de que quieres cancelar?";
+        int resultadoOpcion;
+        
+        resultadoOpcion = JOptionPane.showConfirmDialog(null, textoAlerta , "Selecciona una opción", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        
+        return resultadoOpcion;
     }
     
     private void MostrarErrorCiente(){
