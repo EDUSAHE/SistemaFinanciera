@@ -372,34 +372,27 @@ public class VentanaClientes extends javax.swing.JFrame {
         modalCliente.add(referenciaLabel);
         modalCliente.add(referencia);
 
-//        //Accion del boton
-//        subirCliente.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                //Sacamos los inputs de los Fields
-//                referenciaTemp.setNombre(nombreEmpleado.getText());
-//                referenciaTemp.setApellidoM(apellidoMat.getText());
-//                referenciaTemp.setApellidoP(apellidoPat.getText());
-//
-//                //Sacamos la contraseña y la transformamos a string
-//                temporal = String.valueOf(contraseña.getPassword());
-//                referenciaTemp.setPassword(temporal);
-//                referenciaTemp.setreferencia(referencia.getText());
-//
-//                System.out.println(referenciaTemp.getNombre());
-//                System.out.println(referenciaTemp.getApellidoP());
-//                System.out.println(referenciaTemp.getApellidoM());
-//                System.out.println(referenciaTemp.getreferencia());
-//                System.out.println(referenciaTemp.getPassword());
-//
-//                if(apiSQL.Insertarreferencia(0, referenciaTemp.getNombre(), referenciaTemp.getApellidoP(), referenciaTemp.getApellidoP(), referenciaTemp.getreferencia(), referenciaTemp.getPassword()) == 1){
-//                    MostrarConfirmacionDeCreacion();
-//                }else{
-//                    MostrarErrorEmpleadoExistente();
-//                }
-//                
-//            }
-//        });
+        //Accion del boton
+        subirCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Sacamos los textos de los formularios 
+                // Ponlo en la clase que ocupes para la consultas
+                nombreEmpleado.getText();
+                apellidoMat.getText();
+                apellidoPat.getText();
+                direccion.getText();
+                telefono.getText();
+                referencia.getText();
+                
+                //Si retorna bien alerta de creacion si no de error
+                if(1 == 1){
+                    ConfirmacionCliente();
+                }else{
+                    MostrarErrorCiente();
+                }
+            }
+        });
 
         modalCliente.addWindowListener(new WindowAdapter(){
             @Override
@@ -474,34 +467,28 @@ public class VentanaClientes extends javax.swing.JFrame {
         modalCliente.add(referenciaLabel);
         modalCliente.add(referencia);
 
-//        //Accion del boton
-//        subirCliente.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                //Sacamos los inputs de los Fields
-//                referenciaTemp.setNombre(nombreEmpleado.getText());
-//                referenciaTemp.setApellidoM(apellidoMat.getText());
-//                referenciaTemp.setApellidoP(apellidoPat.getText());
-//
-//                //Sacamos la contraseña y la transformamos a string
-//                temporal = String.valueOf(contraseña.getPassword());
-//                referenciaTemp.setPassword(temporal);
-//                referenciaTemp.setreferencia(referencia.getText());
-//
-//                System.out.println(referenciaTemp.getNombre());
-//                System.out.println(referenciaTemp.getApellidoP());
-//                System.out.println(referenciaTemp.getApellidoM());
-//                System.out.println(referenciaTemp.getreferencia());
-//                System.out.println(referenciaTemp.getPassword());
-//
-//                if(apiSQL.Insertarreferencia(0, referenciaTemp.getNombre(), referenciaTemp.getApellidoP(), referenciaTemp.getApellidoP(), referenciaTemp.getreferencia(), referenciaTemp.getPassword()) == 1){
-//                    MostrarConfirmacionDeCreacion();
-//                }else{
-//                    MostrarErrorEmpleadoExistente();
-//                }
-//                
-//            }
-//        });
+        //Accion del boton
+        subirCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Sacamos los textos de los formularios 
+                // Ponlo en la clase que ocupes para la consultas
+                nombreEmpleado.getText();
+                apellidoMat.getText();
+                apellidoPat.getText();
+                direccion.getText();
+                telefono.getText();
+                referencia.getText();
+                
+                //Si retorna bien alerta de creacion si no de error
+                if(1 == 1){
+                    ConfirmacionCliente();
+                }else{
+                    MostrarErrorCiente();
+                }
+            }
+        });
+
 
         if(modalCliente.getDefaultCloseOperation() == 2){
             MostrarCancelarCliente();
