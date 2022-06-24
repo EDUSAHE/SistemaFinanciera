@@ -87,6 +87,15 @@ public class Boundary {
         return resultado;       
     }
     
+    
+    //Listar Creditos de un cliente 
+    public ResultSet ListCreditosByCliente(int IdCliente){
+        ResultSet resultado;
+        ControllerCredito nuevo= new ControllerCredito();
+        resultado= nuevo.ListCreditosByCliente(IdCliente);
+        return resultado;
+    }
+    
     //ELIMINAR Credito    (Retorno: si  fue eliminado con exito=1  de lo contrario = 0)
     public int EliminarCredito(int idCredito){
         int resultado;
