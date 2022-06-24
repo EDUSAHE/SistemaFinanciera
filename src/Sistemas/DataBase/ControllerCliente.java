@@ -12,16 +12,16 @@ import javax.swing.JOptionPane;
  *
  * @author bran
  */
-public class ControllerDeudor {
-           //-----------------------------------------------------------------------------METODOS-Deudor-------------------------------------------------------------------------------\\
-        //Consultar todas los Deudores
-        public  ResultSet consultarDeudores(){
+public class ControllerCliente {
+           //-----------------------------------------------------------------------------METODOS-Cliente-------------------------------------------------------------------------------\\
+        //Consultar todas los Clientes
+        public  ResultSet consultarClientes(){
            Conexion conexion =new Conexion();
            Connection con =  conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement(" select * FROM DEUDOR ");
+               PreparedStatement ps= con.prepareStatement(" select * FROM Cliente ");
                rs=ps.executeQuery();
                
            }catch(Exception ex){
@@ -38,15 +38,15 @@ public class ControllerDeudor {
             return rs;
        }
         
-        //Consultar todas los Deudor
-        public  ResultSet consultarDeudor(int IdDeudor){
+        //Consultar todas los Cliente
+        public  ResultSet consultarCliente(int IdCliente){
            Conexion conexion =new Conexion();
            Connection con =  conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement(" select * FROM DEUDOR WHERE IdDeudor=?");
-               ps.setInt(1, IdDeudor);
+               PreparedStatement ps= con.prepareStatement(" select * FROM Cliente WHERE IdCliente=?");
+               ps.setInt(1, IdCliente);
                rs=ps.executeQuery();
                
            }catch(Exception ex){
@@ -64,31 +64,30 @@ public class ControllerDeudor {
        }
        
        
-        //Crear Deudor con el metodo POST
-        public  int CrearDeudor(String Nombre,String ApellidoP,String ApellidoM,String Direccion,String Telefono,String DireccionEmpleado,String Referencia){
+        //Crear Cliente con el metodo POST
+        public  int CrearCliente(String Nombre,String ApellidoP,String ApellidoM,String Direccion,String Telefono,String DireccionCliente,String Referencia){
             Conexion conexion =new Conexion();
             Connection con =  conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement("INSERT INTO DEUDOR (Nombre,ApellidoP,ApellidoM,Direccion,Telefono,DireccionEmpleado,Referencia) VALUES(?,?,?,?,?,?,?)");
+               PreparedStatement ps= con.prepareStatement("INSERT INTO Cliente (Nombre,ApellidoP,ApellidoM,Direccion,Telefono,DireccionCliente,Referencia) VALUES(?,?,?,?,?,?,?)");
                ps.setString(1,Nombre);
                ps.setString(2,ApellidoP);
                ps.setString(3,ApellidoM);
                ps.setString(4,Direccion);
                ps.setString(5,Telefono);
-               ps.setString(6,DireccionEmpleado);
+               ps.setString(6,DireccionCliente);
                ps.setString(6,Referencia);
               
                int res=ps.executeUpdate();
                
                if(res> 0){
-                  
-                JOptionPane.showMessageDialog(null," Deudor creado correctamente");
+           
                 return 1;
                 
                }else{
-                   JOptionPane.showMessageDialog(null,"Error al crear");
+    
                    return 0;
                }
  
@@ -106,24 +105,24 @@ public class ControllerDeudor {
             return 0;
        }
        
-        //Elimina Deudor
-       public  int EliminarDeudor(int IdDeudor){
+        //Elimina Cliente
+       public  int EliminarCliente(int IdCliente){
            Conexion conexion =new Conexion();
            Connection con =  conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement(" DELETE FROM DEUDOR WHERE IdDeudor=?");
-                ps.setInt(1,IdDeudor);
+               PreparedStatement ps= con.prepareStatement(" DELETE FROM Cliente WHERE IdCliente=?");
+                ps.setInt(1,IdCliente);
                 int res=ps.executeUpdate();
                
                if(res> 0){
                   
-                JOptionPane.showMessageDialog(null,"Deudor Eliminada Correctamente");
+              
                 return 1;
                 
                }else{
-                   JOptionPane.showMessageDialog(null,"Error al Eliminar");
+                  
                    return 0;
                }
  
@@ -142,32 +141,32 @@ public class ControllerDeudor {
        }
        
      
-       //Actualizar Deudor con el metodo UPDAte
-        public  int ActualizarDeudor(String Nombre,String ApellidoP,String ApellidoM,String Direccion,String Telefono,String DireccionEmpleado,String Referencia,int IdDeudor){
+       //Actualizar Cliente con el metodo UPDAte
+        public  int ActualizarCliente(String Nombre,String ApellidoP,String ApellidoM,String Direccion,String Telefono,String DireccionCliente,String Referencia,int IdCliente){
             Conexion conexion =new Conexion();
             Connection con =  conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement("UPDATE  DEUDOR set Nombre=?,ApellidoP=?,ApellidoM=?,Direccion=?,Telefono=?,DireccionEmpleado=?,Referencia=? WHERE IdDeudor =? ");
+               PreparedStatement ps= con.prepareStatement("UPDATE  Cliente set Nombre=?,ApellidoP=?,ApellidoM=?,Direccion=?,Telefono=?,DireccionCliente=?,Referencia=? WHERE IdCliente =? ");
                ps.setString(1,Nombre);
                ps.setString(2,ApellidoP);
                ps.setString(3,ApellidoM);
                ps.setString(4,Direccion);
                ps.setString(5,Telefono);
-               ps.setString(6,DireccionEmpleado);
+               ps.setString(6,DireccionCliente);
                ps.setString(7,Referencia);
-               ps.setInt(8, IdDeudor);
+               ps.setInt(8, IdCliente);
               
                int res=ps.executeUpdate();
                
                if(res> 0){
                   
-                JOptionPane.showMessageDialog(null," Deudor Actualizado correctamente");
+                
                 return 1;
                 
                }else{
-                   JOptionPane.showMessageDialog(null,"Error al Actualizar");
+                  
                    return 0;
                }
  

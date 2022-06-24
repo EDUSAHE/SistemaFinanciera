@@ -8,8 +8,8 @@ package Almacenamiento.Entity;
  *
  * @author bran
  */
-public class Deudor {
-    int IdDeudor;
+public class Cliente {
+    int IdCliente;
     String Nombre;
     String ApellidoP;
     String ApellidoM;
@@ -18,12 +18,12 @@ public class Deudor {
     String DireccionEmpleado;
     String Referencia;
 
-    public int getIdDeudor() {
-        return IdDeudor;
+    public int getIdCliente() {
+        return IdCliente;
     }
 
-    public void setIdDeudor(int IdDeudor) {
-        this.IdDeudor = IdDeudor;
+    public void setIdCliente(int IdCliente) {
+        this.IdCliente = IdCliente;
     }
 
     public String getNombre() {

@@ -13,18 +13,18 @@ import javax.swing.JOptionPane;
  *
  * @author bran
  */
-public class ControllerDeuda {
-           //-----------------------------------------------------------------------------METODOS-Deuda-------------------------------------------------------------------------------\\
+public class ControllerCredito {
+           //-----------------------------------------------------------------------------METODOS-Credito-------------------------------------------------------------------------------\\
        
-       //consultar un solo Deuda con id
-       public  ResultSet ListOneDeuda(int IdDeuda){
+       //consultar un solo Credito con id
+       public  ResultSet ListOneCredito(int IdCredito){
            Conexion conexion =new Conexion();
            Connection con =  conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement(" SELECT * FROM Deuda WHERE IdDeuda=?");
-                ps.setInt(1,IdDeuda);
+               PreparedStatement ps= con.prepareStatement(" SELECT * FROM Credito WHERE IdCredito=?");
+                ps.setInt(1,IdCredito);
                  rs=ps.executeQuery();
 
            }catch(Exception ex){
@@ -43,14 +43,14 @@ public class ControllerDeuda {
        
        
 
-        //Consultar todas las deudas
-        public  ResultSet ListDeudas(){
+        //Consultar todas las Creditos
+        public  ResultSet ListCreditos(){
            Conexion conexion =new Conexion();
            Connection con = conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement(" select * FROM DEUDA ");
+               PreparedStatement ps= con.prepareStatement(" select * FROM Credito ");
                rs=ps.executeQuery();
                
            }catch(Exception ex){
@@ -67,15 +67,15 @@ public class ControllerDeuda {
             return rs;
        }
        
-       //Crear Deuda con el metodo POST
-        public  int CrearDeuda(int IdDeudor,int IdModalidad,float TotalPrestamo,float Restante){
+       //Crear Credito con el metodo POST
+        public  int CrearCredito(int IdCliente,int IdModalidad,float TotalPrestamo,float Restante){
            Conexion conexion =new Conexion();
            Connection con =  conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement("INSERT INTO DEUDA (IdDeudor,IdModalidad,TotalPrestamo,Restante) VALUES(?,?,?,?)");
-               ps.setFloat(1,IdDeudor);
+               PreparedStatement ps= con.prepareStatement("INSERT INTO Credito (IdCliente,IdModalidad,TotalPrestamo,Restante) VALUES(?,?,?,?)");
+               ps.setFloat(1,IdCliente);
                ps.setFloat(2,IdModalidad);
                ps.setFloat(3,TotalPrestamo);
                ps.setFloat(4,Restante);
@@ -83,11 +83,11 @@ public class ControllerDeuda {
                
                if(res> 0){
                   
-                JOptionPane.showMessageDialog(null," Deuda creada correctamente");
+             
                 return 1;
                 
                }else{
-                   JOptionPane.showMessageDialog(null,"Error al crear");
+                  
                    return 0;
                }
  
@@ -107,24 +107,24 @@ public class ControllerDeuda {
       
         
 
-        //Elimina deuda
-       public  int EliminarDeuda(int IdDeuda){
+        //Elimina Credito
+       public  int EliminarCredito(int IdCredito){
            Conexion conexion =new Conexion();
            Connection con =  conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement(" DELETE FROM DEUDA WHERE IdDeuda=?");
-                ps.setInt(1,IdDeuda);
+               PreparedStatement ps= con.prepareStatement(" DELETE FROM Credito WHERE IdCredito=?");
+                ps.setInt(1,IdCredito);
                 int res=ps.executeUpdate();
                
                if(res> 0){
                   
-                JOptionPane.showMessageDialog(null,"Deuda Eliminada Correctamente");
+                
                 return 1;
                 
                }else{
-                   JOptionPane.showMessageDialog(null,"Error al Eliminar");
+                  
                    return 0;
                           
                }
@@ -144,28 +144,28 @@ public class ControllerDeuda {
        }
        
        
-       //Actualizar Deuda con el metodo Update
-        public  int ActualizarDeuda(int IdDeuda,int IdDeudor,int IdModalidad,float TotalPrestamo,float Restante){
+       //Actualizar Credito con el metodo Update
+        public  int ActualizarCredito(int IdCredito,int IdCliente,int IdModalidad,float TotalPrestamo,float Restante){
            Conexion conexion =new Conexion();
            Connection con =  conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement("UPDATE DEUDA SET IdDeudor=?,IdModalidad=?,TotalPrestamo =?,Restante =?  WHERE IdDeuda=?");
-                ps.setInt(1,IdDeudor);
+               PreparedStatement ps= con.prepareStatement("UPDATE Credito SET IdCliente=?,IdModalidad=?,TotalPrestamo =?,Restante =?  WHERE IdCredito=?");
+                ps.setInt(1,IdCliente);
                ps.setInt(2,IdModalidad);
                ps.setFloat(3,TotalPrestamo);
                ps.setFloat(4,Restante);
-               ps.setInt(5, IdDeuda);
+               ps.setInt(5, IdCredito);
                int res=ps.executeUpdate();
                
                if(res> 0){
                   
-                JOptionPane.showMessageDialog(null," Deuda Actualizada correctamente");
+               
                 return 1;
                 
                }else{
-                   JOptionPane.showMessageDialog(null,"Error al Actualizar");
+                
                    
                    return 0;
                }

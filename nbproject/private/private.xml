@@ -3,16 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Sistemas/DataBase/Conexion.java</file>
+            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/ReglasNegocio/Control/ControlClientes.java</file>
+            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Almacenamiento/Entity/Cliente.java</file>
+            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/ReglasNegocio/Control/ControlCreditos.java</file>
             <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Almacenamiento/Boundary/Boundary.java</file>
-=======
-            <file>file:/C:/Users/nobls/Documents/GitHub/SistemaFinanciera/src/Presentacion/Boundary/VentanaAval.java</file>
-            <file>file:/C:/Users/nobls/Documents/GitHub/SistemaFinanciera/src/Presentacion/Boundary/VentanaEmpleados.java</file>
-            <file>file:/C:/Users/nobls/Documents/GitHub/SistemaFinanciera/src/Almacenamiento/Entity/Aval.java</file>
-            <file>file:/C:/Users/nobls/Documents/GitHub/SistemaFinanciera/src/Presentacion/Boundary/VentanaCreditos.java</file>
-            <file>file:/C:/Users/nobls/Documents/GitHub/SistemaFinanciera/src/Presentacion/Boundary/VentanaClientes.java</file>
->>>>>>> 24eecc2f31c05489bf991159165ebff5c0557676
         </group>
     </open-files>
 </project-private>

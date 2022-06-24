@@ -69,16 +69,16 @@ public class ControllerPago {
        
        
         //Actualizar Pago con el metodo POST
-        public  int ActualizarPago(int IdPago,int IdDeudor,String Fecha,int Monto){
+        public  int ActualizarPago(int IdPago,int IdCliente,String Fecha,int Monto){
            Conexion conexion =new Conexion();
             Connection con = conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement("UPDATE  Pago SET Fecha=?,Monto=? ,IdDeudor WHERE IdPago =?");
+               PreparedStatement ps= con.prepareStatement("UPDATE  Pago SET Fecha=?,Monto=? ,IdCliente WHERE IdPago =?");
                ps.setString(1,Fecha);
                ps.setInt(2,Monto);
-               ps.setInt(3, IdDeudor);
+               ps.setInt(3, IdCliente);
                ps.setInt(4, IdPago);
 
                int res=ps.executeUpdate();
@@ -109,14 +109,14 @@ public class ControllerPago {
        
         
         //Crear Pago con el metodo POST
-        public  int CrearPago(int IdDeudor,String Fecha,int Monto){
+        public  int CrearPago(int IdCliente,String Fecha,int Monto){
            Conexion conexion =new Conexion();
             Connection con = conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement("INSERT INTO Pago (IdDeudor,Fecha,Monto) VALUES(?,?,?)");
-               ps.setInt(1,IdDeudor);
+               PreparedStatement ps= con.prepareStatement("INSERT INTO Pago (IdCliente,Fecha,Monto) VALUES(?,?,?)");
+               ps.setInt(1,IdCliente);
                ps.setString(2,Fecha);
                ps.setInt(3,Monto);
 
@@ -159,11 +159,11 @@ public class ControllerPago {
                
                if(res> 0){
                   
-                JOptionPane.showMessageDialog(null,"Pago Eliminado Correctamente");
+              
                 return 1;
                 
                }else{
-                   JOptionPane.showMessageDialog(null,"Error al Eliminar");
+                 
                    return 0;
                }
  
