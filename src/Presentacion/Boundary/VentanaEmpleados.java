@@ -4,6 +4,7 @@
  */
 package Presentacion.Boundary;
 
+import Almacenamiento.Entity.Usuario;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -30,6 +31,10 @@ import javax.swing.JTextArea;
 public class VentanaEmpleados extends javax.swing.JFrame {
     private GridBagConstraints gridB = new GridBagConstraints();
     private final JFrame estaVentana = this;
+    private Usuario usuarioTemp = new Usuario();
+    private JDialog ventana = new JDialog();
+    private GridBagConstraints gbc = new GridBagConstraints();
+    private int contador = 0;
     /**
      * Creates new form VentanaEmpleados
      */
@@ -37,6 +42,11 @@ public class VentanaEmpleados extends javax.swing.JFrame {
         super("Empleados");
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        usuarioTemp.setNombre("Prueba");
+        usuarioTemp.setApellidoP("Apellido");
+        usuarioTemp.setApellidoM("Materno");
+        usuarioTemp.setUsuario("usuarioTemp");
         MostrarListadoEmpleados();
 
     }
@@ -87,17 +97,19 @@ public class VentanaEmpleados extends javax.swing.JFrame {
         panelGeneralLayout.setHorizontalGroup(
             panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGeneralLayout.createSequentialGroup()
-                .addGap(197, 197, 197)
                 .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonNuevoEmpleado)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGeneralLayout.createSequentialGroup()
-                        .addComponent(labelEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)))
-                .addContainerGap(203, Short.MAX_VALUE))
-            .addGroup(panelGeneralLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelEmpleados)
+                    .addGroup(panelGeneralLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panelEmpleados))
+                    .addGroup(panelGeneralLayout.createSequentialGroup()
+                        .addGap(297, 297, 297)
+                        .addComponent(botonNuevoEmpleado)
+                        .addGap(0, 295, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGeneralLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(labelEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(313, 313, 313))
         );
         panelGeneralLayout.setVerticalGroup(
             panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,10 +117,10 @@ public class VentanaEmpleados extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(labelEmpleados)
                 .addGap(10, 10, 10)
-                .addComponent(panelEmpleados, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelEmpleados, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                .addGap(23, 23, 23)
                 .addComponent(botonNuevoEmpleado)
-                .addGap(17, 17, 17))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -133,7 +145,7 @@ public class VentanaEmpleados extends javax.swing.JFrame {
                 .addComponent(logoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -141,6 +153,8 @@ public class VentanaEmpleados extends javax.swing.JFrame {
 
     private void botonNuevoEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoEmpleadoActionPerformed
         // TODO add your handling code here:
+        MostrarFormularioNuevoEmpleado(ventana);
+        
     }//GEN-LAST:event_botonNuevoEmpleadoActionPerformed
 
     /**
@@ -178,7 +192,7 @@ public class VentanaEmpleados extends javax.swing.JFrame {
         });
     }
     
-    private JPanel creaPanelInformacion(String nombre, String apellidoPat, String apellidoMat, String usuario){
+    private JPanel CreaPanelInformacion(Usuario usuarioTemp){
         JPanel resultado = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         JTextArea textPanel;
@@ -187,17 +201,17 @@ public class VentanaEmpleados extends javax.swing.JFrame {
         String tempStr = "";
         
         //Creamos el texto que tendra el textArea
-        tempStr += "Nombre(s): " + nombre + "\n";
-        tempStr += "Apellido Pat. : " + apellidoPat + "\n";
-        tempStr += "Apellido Mat. : " + apellidoMat + "\n";
-        tempStr += "Usuario: " + usuario + "\n";
+        tempStr += "Nombre(s): " + usuarioTemp.getNombre() + "\n";
+        tempStr += "Apellido Pat. : " + usuarioTemp.getApellidoP() + "\n";
+        tempStr += "Apellido Mat. : " + usuarioTemp.getApellidoM() + "\n";
+        tempStr += "Usuario: " + usuarioTemp.getUsuario() + "\n";
         
         //Creamos los iconos y reescalamos
-        iconoEditar = new ImageIcon("src/Utilidades/Editar.png");
+        iconoEditar = new ImageIcon("/Imagenes/Editar.png");
         Image imageEditar = iconoEditar.getImage();
         Image editarEscalado = imageEditar.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
 
-        iconoEliminar = new ImageIcon("src/Utilidades/Eliminar.png");
+        iconoEliminar = new ImageIcon("/Imagenes/Eliminar.png");
         Image imageEliminar = iconoEliminar.getImage();
         Image eliminarEscalado = imageEliminar.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
         
@@ -205,8 +219,8 @@ public class VentanaEmpleados extends javax.swing.JFrame {
         iconoEliminar = new ImageIcon(eliminarEscalado);
         
         //Creamos los botones
-        botonEditar = new JButton(iconoEditar);
-        botonEliminar = new JButton(iconoEliminar);
+        botonEditar = new JButton("Editar",iconoEditar);
+        botonEliminar = new JButton("Eliminar",iconoEliminar);
 
         //Dimensiones de los botones
         botonEditar.setSize(new Dimension(120,120));
@@ -221,9 +235,9 @@ public class VentanaEmpleados extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ev){
                 //Si le da click a editar mandaremos a llamar el metodo de editar
-                //TODO: idUsuario
+                //BRANDON Mandar a llamar el formulario pasale id como segundo parametro y ahi dentro del metodo busca al empleado
                 int idUsuario = 0;
-                //MostrarFormularioEdicionEmpleado(modalFormulario,0);
+                MostrarFormularioEdicionEmpleado(ventana,0);
             }
         });
 
@@ -231,6 +245,10 @@ public class VentanaEmpleados extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ev){
                /*Eliminamos de la base de datos*/
+               //BRANDON: Eliminar de la base
+               if(MostrarConfirmacionDeEliminacion() == 1){
+                   //Aqui mandas a eliminar
+               }
             }
         });
         
@@ -239,33 +257,36 @@ public class VentanaEmpleados extends javax.swing.JFrame {
         gbc.gridy = 0;
         gbc.gridheight = 2;
         gbc.gridwidth = 2;
-        gbc.weightx = 1.0;
+        gbc.weightx = 0.7;
         gbc.fill = GridBagConstraints.BOTH;
         gbc.anchor = GridBagConstraints.WEST;
-        gbc.insets = new Insets(0,0,20,0);
         
         //Añadimos el panel
         resultado.add(textPanel,gbc);
 
         //Default gbc
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.NONE;
         gbc.weightx = 0.0;
     
         //Añadimos los botones
         gbc.gridx = 2;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
+        gbc.weighty = 1.0;
+        gbc.weightx = .1;
+        gbc.fill = GridBagConstraints.BOTH;
 
         resultado.add(botonEditar,gbc);
 
-        //Default
-        gbc.weighty = 0.0;  
+        //Default  
+        gbc.fill = GridBagConstraints.NONE;
 
         gbc.gridx = 2;
         gbc.gridy = 1;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
+        gbc.fill = GridBagConstraints.BOTH;
 
         resultado.add(botonEliminar,gbc);
 
@@ -276,10 +297,30 @@ public class VentanaEmpleados extends javax.swing.JFrame {
     
     private void MostrarListadoEmpleados(){
         initComponents();
-        JPanel pruebaPanel = new JPanel(new GridLayout(12,1));
-        //pruebaPanel.add(CreaPanelInformacion())
-        panelEmpleados.setViewportView(pruebaPanel);
+        JPanel pruebaPanel = new JPanel(new GridBagLayout());
         
+        pruebaPanel = AgregarNuevoPanel(pruebaPanel,usuarioTemp);
+        pruebaPanel.updateUI();
+        panelEmpleados.setViewportView(pruebaPanel);
+        panelEmpleados.updateUI();
+    }
+    
+    private JPanel AgregarNuevoPanel(JPanel panelRetorno, Usuario usuarioPanel){
+        //Para agregar un nuevo usaremos una variable contador para las columnas asi sera reactivo
+        // La columna de las y en la variable gbc son los renglones
+        gbc.gridx = 0;
+        gbc.gridy = contador;
+        
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        contador++;
+        
+        panelRetorno.add(CreaPanelInformacion(usuarioTemp),gbc);
+        
+        //Regresamos as los valores default para el siguiente
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.weightx = 0;
+        return panelRetorno;
     }
     
     protected void MostrarConfirmacionDeCambios() {
@@ -337,10 +378,10 @@ public class VentanaEmpleados extends javax.swing.JFrame {
 
         // Propiedades de la ventana
         modalFormulario.setTitle("Nuevo Empleado");
-		modalFormulario.setSize(1002, 680);
-		modalFormulario.setLocationRelativeTo(null);
-		modalFormulario.setResizable(false);
-		modalFormulario.setLayout(new GridLayout(15,1));
+	modalFormulario.setSize(1002, 680);
+	modalFormulario.setLocationRelativeTo(null);
+	modalFormulario.setResizable(false);
+	modalFormulario.setLayout(new GridLayout(15,1));
 
         //Creamos los labels
         nombreLabel = new JLabel("Nombre(s):");
