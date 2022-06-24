@@ -5,9 +5,13 @@
 package Presentacion.Boundary;
 
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,6 +29,8 @@ import javax.swing.JTextField;
  */
 public class VentanaCreditos extends javax.swing.JFrame {
     private final JFrame estaVentana = this;
+    private GridBagConstraints gbc = new GridBagConstraints();
+    private int contador = 0;
     /**
      * Creates new form VentanaCreditos
      */
@@ -32,6 +38,7 @@ public class VentanaCreditos extends javax.swing.JFrame {
         super("Creditos");
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         MostrarListadoCreditosCliente();
     }
 
@@ -52,7 +59,7 @@ public class VentanaCreditos extends javax.swing.JFrame {
         botonEliminarCredito = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         labelCreditos = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        panelCreditos = new javax.swing.JScrollPane();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -100,7 +107,7 @@ public class VentanaCreditos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addComponent(panelCreditos)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -109,7 +116,7 @@ public class VentanaCreditos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(labelCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+                .addComponent(panelCreditos, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -154,13 +161,19 @@ public class VentanaCreditos extends javax.swing.JFrame {
 
     private void botonAgregarCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarCreditoActionPerformed
         //Manda a llamar el formulario de nuevo cliente
+        MostrarFormularioNuevoCredito();
     }//GEN-LAST:event_botonAgregarCreditoActionPerformed
 
     private void botonEliminarCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarCreditoActionPerformed
-        // TODO add your handling code here:
+        /*Eliminamos de la base de datos*/
+        //BRANDON: Eliminar de la base
+        if(MostrarConfirmacionDeEliminacion() == 1){
+           //Aqui mandas a eliminar
+        }
     }//GEN-LAST:event_botonEliminarCreditoActionPerformed
 
-    private JPanel creaPanelCredito(String monto, String pago, String modalidad, String plazo){
+    private JPanel CreaPanelCredito(String monto, String pago, String modalidad, String plazo){
+        //BRANDON: Para esta parte cambia los parametros y pone la clase que ocupes y en vez de asignar los parametros hazle un get
         JPanel resultado = new JPanel(new GridLayout(2,2));
         JPanel auxiliarMonto, auxiliarPago, auxiliarModalidad, auxiliarPlazo;
         JLabel labelMonto, labelPago, labelModalidad, labelPlazo;
@@ -176,24 +189,28 @@ public class VentanaCreditos extends javax.swing.JFrame {
         //Monto
         labelMonto = new JLabel("Monto:");
         fieldMonto = new JTextField(monto);
+        fieldMonto.setEditable(false);
         auxiliarMonto.add(labelMonto);
         auxiliarMonto.add(fieldMonto);
         
         //Pago
         labelPago = new JLabel("Pago:");
         fieldPago = new JTextField(pago);
+        fieldPago.setEditable(false);
         auxiliarPago.add(labelPago);
         auxiliarPago.add(fieldPago);
         
         //Modalidad
         labelModalidad = new JLabel("Modalidad:");
         fieldModalidad = new JTextField(modalidad);
+        fieldModalidad.setEditable(false);
         auxiliarModalidad.add(labelModalidad);
         auxiliarModalidad.add(fieldModalidad);
         
         //Plazo
         labelPlazo = new JLabel("Plazo:");
         fieldPlazo = new JTextField(plazo);
+        fieldModalidad.setEditable(false);
         auxiliarPlazo.add(labelPlazo);
         auxiliarPlazo.add(fieldPlazo);
         
@@ -209,13 +226,47 @@ public class VentanaCreditos extends javax.swing.JFrame {
     
     private void MostrarListadoCreditosCliente(){
         initComponents();
+        JPanel pruebaPanel = new JPanel(new GridBagLayout());
+        pruebaPanel = AgregarNuevoPanel(pruebaPanel);
+        pruebaPanel.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent me){
+                MostrarFormularioEdicionCredito( 1);
+            }
+        });
+        pruebaPanel.updateUI();
+        panelCreditos.setViewportView(pruebaPanel);
+        panelCreditos.updateUI();
         
     }
     
-    private void MostrarFormularioNuevoCredito(JDialog modalCredito){
+    private JPanel AgregarNuevoPanel(JPanel panelRetorno){
+        //Para agregar un nuevo usaremos una variable contador para las columnas asi sera reactivo
+        // La columna de las y en la variable gbc son los renglones
+        gbc.gridx = 0;
+        gbc.gridy = contador;
+        
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        contador++;
+        String monto = "$2000";
+        String pago = "$300";
+        String modalidad = "Diario";
+        String plazo = "25 dias";
+            
+        panelRetorno.add(CreaPanelCredito(monto,pago,modalidad,plazo),gbc);
+        
+        //Regresamos as los valores default para el siguiente
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.weightx = 0;
+        return panelRetorno;
+    }
+    
+    private void MostrarFormularioNuevoCredito(){
+        JDialog modalCredito = new JDialog();
         //Va a devolver un tipo de clase para la base de datos por lo mientras lo dejare en void
         JTextField montoField, pagoNecesarioField;
         JLabel montoLabel, pagoModalidadLabel, pagoPlazoLabel, pagoNecesarioLabel;
+        GridBagConstraints gbc = new GridBagConstraints();
         JButton subirCredito;
         JComboBox opcionesModalidad, opcionesPlazos;
         String [] opcionesTexto = {"Diario", "Semanal", "Quincenal", "Mensual"};
@@ -228,7 +279,8 @@ public class VentanaCreditos extends javax.swing.JFrame {
 	modalCredito.setSize(1002, 680);
 	modalCredito.setLocationRelativeTo(null);
 	modalCredito.setResizable(false);
-	modalCredito.setLayout(new GridLayout(4,2));
+	modalCredito.setLayout(new GridBagLayout());
+        modalCredito.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         //Creamos los labels
         montoLabel = new JLabel("Monto requerido");
@@ -241,8 +293,8 @@ public class VentanaCreditos extends javax.swing.JFrame {
         pagoNecesarioField = new JTextField();
        
         //Creamos el combobox
-        DefaultComboBoxModel<String> modeloSemanal = new DefaultComboBoxModel<>(opcionesTexto);
-        DefaultComboBoxModel<String> modeloQuincenal = new DefaultComboBoxModel<>(opcionesTexto);
+        DefaultComboBoxModel<String> modeloSemanal = new DefaultComboBoxModel<>(opcionesPlazoSemanal);
+        DefaultComboBoxModel<String> modeloQuincenal = new DefaultComboBoxModel<>(opcionesPlazoQuincenal);
         opcionesPlazos = new JComboBox(modeloSemanal);
         opcionesModalidad = new JComboBox(opcionesTexto);
         
@@ -252,19 +304,21 @@ public class VentanaCreditos extends javax.swing.JFrame {
                 int opcion = opcionesModalidad.getSelectedIndex();
                 switch(opcion){
                     case 0:
-                        opcionesModalidad.addItem("25 dias");
+                        opcionesPlazos.removeAllItems();
+                        opcionesPlazos.addItem("25 dias");
                         break;
                         
                     case 1:
-                        opcionesModalidad.setModel(modeloSemanal);
+                        opcionesPlazos.setModel(modeloSemanal);
                         break;
                     
                     case 2:
-                        opcionesModalidad.setModel(modeloQuincenal);
+                        opcionesPlazos.setModel(modeloQuincenal);
                         break;
                     
                     case 3:
-                        opcionesModalidad.addItem("1 Mes");
+                        opcionesPlazos.removeAllItems();
+                        opcionesPlazos.addItem("1 Mes");
                         break;
                 }
             }
@@ -278,58 +332,93 @@ public class VentanaCreditos extends javax.swing.JFrame {
         //Definimos el Tamaño del boton
         subirCredito.setSize(new Dimension(285,65));
 
-        //Agregamos al Panel
-        modalCredito.add(montoLabel);
-        modalCredito.add(montoField);
-        modalCredito.add(pagoModalidadLabel);
-        modalCredito.add(opcionesModalidad);
-        modalCredito.add(pagoPlazoLabel);
-        modalCredito.add(opcionesPlazos);
-        modalCredito.add(pagoNecesarioLabel);
-        modalCredito.add(pagoNecesarioField);
-
-//        //Accion del boton
-//        subirCredito.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                //Sacamos los inputs de los Fields
-//                referenciaTemp.setNombre(nombreEmpleado.getText());
-//                referenciaTemp.setApellidoM(apellidoMat.getText());
-//                referenciaTemp.setApellidoP(apellidoPat.getText());
-//
-//                //Sacamos la contraseña y la transformamos a string
-//                temporal = String.valueOf(contraseña.getPassword());
-//                referenciaTemp.setPassword(temporal);
-//                referenciaTemp.setreferencia(referencia.getText());
-//
-//                System.out.println(referenciaTemp.getNombre());
-//                System.out.println(referenciaTemp.getApellidoP());
-//                System.out.println(referenciaTemp.getApellidoM());
-//                System.out.println(referenciaTemp.getreferencia());
-//                System.out.println(referenciaTemp.getPassword());
-//
-//                if(apiSQL.Insertarreferencia(0, referenciaTemp.getNombre(), referenciaTemp.getApellidoP(), referenciaTemp.getApellidoP(), referenciaTemp.getreferencia(), referenciaTemp.getPassword()) == 1){
-//                    MostrarConfirmacionDeCreacion();
-//                }else{
-//                    MostrarErrorEmpleadoExistente();
-//                }
-//                
-//            }
-//        });
-
+        //Creamos las configuraciones de las constantes
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 1;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.5;
+        gbc.fill = GridBagConstraints.BOTH;
+        //Agregamos el monto
+        modalCredito.add(montoLabel,gbc);
         
-        modalCredito.add(subirCredito);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        modalCredito.add(montoField,gbc);
+        
+        //Agregamos el pago Modalidad
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        modalCredito.add(pagoModalidadLabel,gbc);
+        gbc.gridx = 1;
+        gbc.gridx = 1;
+        modalCredito.add(opcionesModalidad,gbc);
+        
+        //Agregamos el pago plazo
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        modalCredito.add(pagoPlazoLabel,gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        modalCredito.add(opcionesPlazos,gbc);
+        
+        //Agreagamos el pago Necesario
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        modalCredito.add(pagoNecesarioLabel,gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        modalCredito.add(pagoNecesarioField,gbc);
+        
+        
+        
+        //Default
+        gbc.gridy = 0;
+        gbc.gridx = 0; 
+
+        //Accion del boton
+        subirCredito.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Sacamos los inputs de los Field
+                //BRANDON: Pon el set de la clase que usaras antes de los gets para que se los asignes
+                montoField.getText();
+                pagoNecesarioField.getText();
+                opcionesModalidad.getSelectedItem();
+                opcionesPlazos.getSelectedItem();
+                
+                //Se sube a la base de datos 
+                if(EnviarDatosNuevoCredito() == 1){
+                    MostrarConfirmacionDeCreacion();
+                }
+                
+            }
+        });
+
+        //Agregamos el boton
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        
+        modalCredito.add(subirCredito,gbc);
         modalCredito.setVisible(true);
-    }
-    
-    private void EnviarDatosNuevoCredito(){
         
     }
     
-    private void MostrarFormularioEdicionCredito(JDialog modalCredito, int parametroConsulta){
+    //BRANDON: Para este metodo pasale de parametro el objeto y haz la consulta desde el metodo
+    private int EnviarDatosNuevoCredito(){
+        return 1;
+    }
+    
+    private void MostrarFormularioEdicionCredito( int parametroConsulta){
+        JDialog modalCredito = new JDialog();
         //Va a devolver un tipo de clase para la base de datos por lo mientras lo dejare en void
         JTextField montoField, pagoNecesarioField;
         JLabel montoLabel, pagoModalidadLabel, pagoPlazoLabel, pagoNecesarioLabel;
+        GridBagConstraints gbc = new GridBagConstraints();
         JButton subirCredito;
         JComboBox opcionesModalidad, opcionesPlazos;
         String [] opcionesTexto = {"Diario", "Semanal", "Quincenal", "Mensual"};
@@ -339,12 +428,15 @@ public class VentanaCreditos extends javax.swing.JFrame {
 
         // Propiedades de la ventana
         modalCredito.setTitle("Nuevo Credito");
+        modalCredito.setModal(true);
 	modalCredito.setSize(1002, 680);
 	modalCredito.setLocationRelativeTo(null);
 	modalCredito.setResizable(false);
-	modalCredito.setLayout(new GridLayout(4,2));
+	modalCredito.setLayout(new GridBagLayout());
+        modalCredito.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         //Creamos los labels
+        //BRANDON :En los constructores haz un get de la clase para que lo ponga en el formulario
         montoLabel = new JLabel("Monto requerido");
         pagoModalidadLabel = new JLabel("Modalidad de pago");
         pagoPlazoLabel = new JLabel("Pazo de Plago");
@@ -355,8 +447,8 @@ public class VentanaCreditos extends javax.swing.JFrame {
         pagoNecesarioField = new JTextField();
        
         //Creamos el combobox
-        DefaultComboBoxModel<String> modeloSemanal = new DefaultComboBoxModel<>(opcionesTexto);
-        DefaultComboBoxModel<String> modeloQuincenal = new DefaultComboBoxModel<>(opcionesTexto);
+        DefaultComboBoxModel<String> modeloSemanal = new DefaultComboBoxModel<>(opcionesPlazoSemanal);
+        DefaultComboBoxModel<String> modeloQuincenal = new DefaultComboBoxModel<>(opcionesPlazoQuincenal);
         opcionesPlazos = new JComboBox(modeloSemanal);
         opcionesModalidad = new JComboBox(opcionesTexto);
         
@@ -366,19 +458,21 @@ public class VentanaCreditos extends javax.swing.JFrame {
                 int opcion = opcionesModalidad.getSelectedIndex();
                 switch(opcion){
                     case 0:
-                        opcionesModalidad.addItem("25 dias");
+                        opcionesPlazos.removeAllItems();
+                        opcionesPlazos.addItem("25 dias");
                         break;
                         
                     case 1:
-                        opcionesModalidad.setModel(modeloSemanal);
+                        opcionesPlazos.setModel(modeloSemanal);
                         break;
                     
                     case 2:
-                        opcionesModalidad.setModel(modeloQuincenal);
+                        opcionesPlazos.setModel(modeloQuincenal);
                         break;
                     
                     case 3:
-                        opcionesModalidad.addItem("1 Mes");
+                        opcionesPlazos.removeAllItems();
+                        opcionesPlazos.addItem("1 Mes");
                         break;
                 }
             }
@@ -392,47 +486,78 @@ public class VentanaCreditos extends javax.swing.JFrame {
         //Definimos el Tamaño del boton
         subirCredito.setSize(new Dimension(285,65));
 
-        //Agregamos al Panel
-        modalCredito.add(montoLabel);
-        modalCredito.add(montoField);
-        modalCredito.add(pagoModalidadLabel);
-        modalCredito.add(opcionesModalidad);
-        modalCredito.add(pagoPlazoLabel);
-        modalCredito.add(opcionesPlazos);
-        modalCredito.add(pagoNecesarioLabel);
-        modalCredito.add(pagoNecesarioField);
-
-//        //Accion del boton
-//        subirCredito.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                //Sacamos los inputs de los Fields
-//                referenciaTemp.setNombre(nombreEmpleado.getText());
-//                referenciaTemp.setApellidoM(apellidoMat.getText());
-//                referenciaTemp.setApellidoP(apellidoPat.getText());
-//
-//                //Sacamos la contraseña y la transformamos a string
-//                temporal = String.valueOf(contraseña.getPassword());
-//                referenciaTemp.setPassword(temporal);
-//                referenciaTemp.setreferencia(referencia.getText());
-//
-//                System.out.println(referenciaTemp.getNombre());
-//                System.out.println(referenciaTemp.getApellidoP());
-//                System.out.println(referenciaTemp.getApellidoM());
-//                System.out.println(referenciaTemp.getreferencia());
-//                System.out.println(referenciaTemp.getPassword());
-//
-//                if(apiSQL.Insertarreferencia(0, referenciaTemp.getNombre(), referenciaTemp.getApellidoP(), referenciaTemp.getApellidoP(), referenciaTemp.getreferencia(), referenciaTemp.getPassword()) == 1){
-//                    MostrarConfirmacionDeCreacion();
-//                }else{
-//                    MostrarErrorEmpleadoExistente();
-//                }
-//                
-//            }
-//        });
-
+        //Creamos las configuraciones de las constantes
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 1;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.5;
+        gbc.fill = GridBagConstraints.BOTH;
+        //Agregamos el monto
+        modalCredito.add(montoLabel,gbc);
         
-        modalCredito.add(subirCredito);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        modalCredito.add(montoField,gbc);
+        
+        //Agregamos el pago Modalidad
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        modalCredito.add(pagoModalidadLabel,gbc);
+        gbc.gridx = 1;
+        gbc.gridx = 1;
+        modalCredito.add(opcionesModalidad,gbc);
+        
+        //Agregamos el pago plazo
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        modalCredito.add(pagoPlazoLabel,gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        modalCredito.add(opcionesPlazos,gbc);
+        
+        //Agreagamos el pago Necesario
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        modalCredito.add(pagoNecesarioLabel,gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        modalCredito.add(pagoNecesarioField,gbc);
+        
+        
+        
+        //Default
+        gbc.gridy = 0;
+        gbc.gridx = 0; 
+
+        //Accion del boton
+        subirCredito.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Sacamos los inputs de los Field
+                //BRANDON: Pon el set de la clase que usaras antes de los gets para que se los asignes
+                montoField.getText();
+                pagoNecesarioField.getText();
+                opcionesModalidad.getSelectedItem();
+                opcionesPlazos.getSelectedItem();
+                
+                //Se sube a la base de datos 
+                if(EnviarDatosNuevoCredito() == 1){
+                    MostrarConfirmacionDeCreacion();
+                }
+                
+            }
+        });
+
+        //Agregamos el boton
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        
+        modalCredito.add(subirCredito,gbc);
         modalCredito.setVisible(true);
     }
     
@@ -509,10 +634,10 @@ public class VentanaCreditos extends javax.swing.JFrame {
     private javax.swing.JButton botonEliminarCredito;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel labelCreditos;
     private javax.swing.JLabel labelInformacion;
     private javax.swing.JLabel logoEmpresa;
+    private javax.swing.JScrollPane panelCreditos;
     // End of variables declaration//GEN-END:variables
 }

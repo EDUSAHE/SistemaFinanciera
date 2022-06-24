@@ -4,15 +4,25 @@
  */
 package Presentacion.Boundary;
 
+import Almacenamiento.Entity.Usuario;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -21,6 +31,9 @@ import javax.swing.JTextField;
  */
 public class VentanaClientes extends javax.swing.JFrame {
     private final JFrame estaVentana = this;
+    private GridBagConstraints gbc = new GridBagConstraints();
+    private Usuario usuarioTemp = new Usuario();
+    private int contador = 0;
     /**
      * Creates new form VentanaClientes
      */
@@ -28,8 +41,14 @@ public class VentanaClientes extends javax.swing.JFrame {
         super("Clientes");
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        initComponents();
+        this.setResizable(false);
+        usuarioTemp.setNombre("Prueba");
+        usuarioTemp.setApellidoP("Apellido");
+        usuarioTemp.setApellidoM("Materno");
+        usuarioTemp.setHorario("horarioTemp");
+        MostrarListadoClientes();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,7 +64,7 @@ public class VentanaClientes extends javax.swing.JFrame {
         paneBusqueda = new javax.swing.JTextPane();
         botonNuevoCliente = new javax.swing.JButton();
         labelClientes = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        panelClientes = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -75,7 +94,7 @@ public class VentanaClientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addComponent(jScrollPane1))
+                        .addComponent(panelClientes))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(logoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -107,7 +126,7 @@ public class VentanaClientes extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(labelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
@@ -116,6 +135,7 @@ public class VentanaClientes extends javax.swing.JFrame {
 
     private void botonNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoClienteActionPerformed
         //Manda a llamar el formulario de nuevo cliente
+        MostrarFormularioVacioCliente();
     }//GEN-LAST:event_botonNuevoClienteActionPerformed
 
     /**
@@ -148,12 +168,148 @@ public class VentanaClientes extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaClientes().setVisible(true);
+                new VentanaClientes();
             }
         });
     }
     
-    private void MostrarFormularioVacioCliente(JDialog modalCliente){
+   private JPanel CreaPanelInformacion(Usuario usuarioTemp){
+        JPanel resultado = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        JTextArea textPanel;
+        ImageIcon iconoEditar, iconoEliminar;
+        JButton botonEditar, botonEliminar;
+        String tempStr = "";
+        
+        //Creamos el texto que tendra el textArea
+        tempStr += "Nombre(s): " + usuarioTemp.getNombre() + "\n";
+        tempStr += "Apellido Pat. : " + usuarioTemp.getApellidoP() + "\n";
+        tempStr += "Apellido Mat. : " + usuarioTemp.getApellidoM() + "\n";
+        tempStr += "Numero de telefono: " + usuarioTemp.getHorario()+ "\n";
+        
+        //Creamos los iconos y reescalamos
+        iconoEditar = new ImageIcon("/Imagenes/Editar.png");
+        Image imageEditar = iconoEditar.getImage();
+        Image editarEscalado = imageEditar.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
+
+        iconoEliminar = new ImageIcon("/Imagenes/Eliminar.png");
+        Image imageEliminar = iconoEliminar.getImage();
+        Image eliminarEscalado = imageEliminar.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
+        
+        iconoEditar = new ImageIcon(editarEscalado);
+        iconoEliminar = new ImageIcon(eliminarEscalado);
+        
+        //Creamos los botones
+        botonEditar = new JButton("Editar",iconoEditar);
+        botonEliminar = new JButton("Eliminar",iconoEliminar);
+
+        //Dimensiones de los botones
+        botonEditar.setSize(new Dimension(120,120));
+        botonEliminar.setSize(new Dimension(120,120));
+
+        //Creamos el TextArea
+        textPanel = new JTextArea(tempStr);
+        textPanel.setEditable(false);
+        textPanel.setSize(new Dimension(200,150));
+        
+        //Acciones Botones
+        botonEditar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ev){
+                //Si le da click a editar mandaremos a llamar el metodo de editar
+                //BRANDON Mandar a llamar el formulario pasale id como segundo parametro y ahi dentro del metodo busca al empleado
+                int idUsuario = 0;
+                MostrarFormularioCliente(0);
+            }
+        });
+
+        botonEliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ev){
+               /*Eliminamos de la base de datos*/
+               //BRANDON: Eliminar de la base
+               EliminarCliente();
+            }
+        });
+        
+        //Añadimos al panel
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridheight = 2;
+        gbc.gridwidth = 2;
+        gbc.weightx = 0.7;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = GridBagConstraints.WEST;
+        
+        //Añadimos el panel
+        resultado.add(textPanel,gbc);
+
+        //Default gbc
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.weightx = 0.0;
+    
+        //Añadimos los botones
+        gbc.gridx = 2;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 1;
+        gbc.weighty = 1.0;
+        gbc.weightx = .1;
+        gbc.fill = GridBagConstraints.BOTH;
+
+        resultado.add(botonEditar,gbc);
+
+        //Default  
+        gbc.fill = GridBagConstraints.NONE;
+
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+
+        resultado.add(botonEliminar,gbc);
+
+        //Default
+        gbc.weighty = 0.0;
+        return resultado;
+    }
+    
+    private void MostrarListadoClientes(){
+        initComponents();
+        JPanel pruebaPanel = new JPanel(new GridBagLayout());
+        pruebaPanel = AgregarNuevoPanel(pruebaPanel,usuarioTemp);
+        pruebaPanel.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent me){
+                //Mandamos a llamar a una ventana Aval
+                new VentanaAval();
+            }
+        });
+        pruebaPanel.updateUI();
+        panelClientes.setViewportView(pruebaPanel);
+        panelClientes.updateUI();
+    }
+    
+    private JPanel AgregarNuevoPanel(JPanel panelRetorno, Usuario usuarioPanel){
+        //Para agregar un nuevo usaremos una variable contador para las columnas asi sera reactivo
+        // La columna de las y en la variable gbc son los renglones
+        gbc.gridx = 0;
+        gbc.gridy = contador;
+        
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        contador++;
+        
+        panelRetorno.add(CreaPanelInformacion(usuarioTemp),gbc);
+        
+        //Regresamos as los valores default para el siguiente
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.weightx = 0;
+        return panelRetorno;
+    }
+    
+    private void MostrarFormularioVacioCliente(){
+        JDialog modalCliente = new JDialog();
         //Va a devolver un tipo de clase para la base de datos por lo mientras lo dejare en void
         JTextField nombreEmpleado, apellidoMat, apellidoPat, direccion, telefono, referencia;
         JLabel nombreLabel, apellidoMatLabel, apellidoPatLabel, direccionLabel, telefonoLabel, referenciaLabel;
@@ -249,7 +405,8 @@ public class VentanaClientes extends javax.swing.JFrame {
         modalCliente.setVisible(true);
     }
     
-    private void MostrarFormularioCliente(JDialog modalCliente, int idUsuario){
+    private void MostrarFormularioCliente( int idUsuario){
+        JDialog modalCliente = new JDialog();
         //Va a devolver un tipo de clase para la base de datos por lo mientras lo dejare en void
         JTextField nombreEmpleado, apellidoMat, apellidoPat, direccion, telefono, referencia;
         JLabel nombreLabel, apellidoMatLabel, apellidoPatLabel, direccionLabel, telefonoLabel, referenciaLabel;
@@ -390,10 +547,10 @@ public class VentanaClientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonNuevoCliente;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelClientes;
     private javax.swing.JLabel logoEmpresa;
     private javax.swing.JTextPane paneBusqueda;
+    private javax.swing.JScrollPane panelClientes;
     // End of variables declaration//GEN-END:variables
 }
