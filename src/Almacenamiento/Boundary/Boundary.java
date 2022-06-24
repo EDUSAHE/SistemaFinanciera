@@ -475,7 +475,7 @@ public class Boundary {
             //nuevo.InsertarMulta("12/10/12", 2);
             //nuevo.InsertarPago("12/4", 3);
             //nuevo.InsertarTipoUsuario("TipoUsuario");
-           // Usuario nuevoUsuario = new Usuario();
+            //Usuario nuevoUsuario = new Usuario();
             //nuevoUsuario.setNombre("Brandon");
             //nuevoUsuario.setApellidoP("Ortiz");
             //nuevoUsuario.setApellidoM("Rojas");
