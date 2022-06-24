@@ -28,7 +28,7 @@ SET FILES NIO TRUE
 SET FILES NIO SIZE 256
 SET FILES LOG TRUE
 SET FILES LOG SIZE 50
-SET FILES CHECK 2655
+SET FILES CHECK 3037
 SET DATABASE COLLATION "SQL_TEXT" PAD SPACE
 CREATE USER "Financiera" PASSWORD DIGEST 'd41d8cd98f00b204e9800998ecf8427e'
 ALTER USER "Financiera" SET LOCAL TRUE
@@ -61,8 +61,8 @@ SET SCHEMA SYSTEM_LOBS
 INSERT INTO BLOCKS VALUES(0,2147483647,0)
 SET SCHEMA PUBLIC
 INSERT INTO CLIENTE VALUES(0,'Hazel Alain','Lopez','Garcia','Acatlima','951123456','Acatlima','Casa azul')
-INSERT INTO CLIENTE VALUES(1,'Brandon','Rojas','Ortiz ','Acatlima','9511234567','Acatlima','Casa Morada')
-INSERT INTO CLIENTE VALUES(2,'Eduardo','Sanchez','Sanchez','Acatlima','123456789','Acatlima','Casa Amarilla')
+INSERT INTO CLIENTE VALUES(1,'Jorge','Rojas','Ortiz ','Acatlima','9511234567','Acatlima','Casa Morada')
+INSERT INTO CLIENTE VALUES(2,'Eduardo','Hernandez','Sanchez','Acatlima','123456789','Acatlima','Casa Amarilla')
 INSERT INTO CLIENTE VALUES(3,'Diego1','Garcia','Santiba\u00f1ez','Hiajuapan, centro','123456789','Hiajuapan, centro','Casa Morada')
 INSERT INTO USUARIO VALUES(6,0,'','','','','','')
 INSERT INTO USUARIO VALUES(7,0,'','','','','admin','admin')

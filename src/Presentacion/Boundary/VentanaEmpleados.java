@@ -530,7 +530,7 @@ public class VentanaEmpleados extends javax.swing.JFrame {
         ImageIcon iconoBotonSubir;
 
         // Propiedades de la ventana
-        modalFormulario.setTitle("Nuevo Empleado");
+        modalFormulario.setTitle("Editar Empleado");
         modalFormulario.setSize(1002, 680);
         modalFormulario.setLocationRelativeTo(null);
         modalFormulario.setResizable(false);
@@ -592,6 +592,12 @@ public class VentanaEmpleados extends javax.swing.JFrame {
       subirEmpleado.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
+                nombreEmpleado.getText();
+                apellidoMat.getText();
+                apellidoPat.getText();
+                usuario.getText();
+                contraseña.getText();
+                horario.getText();
              
 //
 //                

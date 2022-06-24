@@ -22,7 +22,7 @@ public class Conexion {
             try{
                 Class.forName("org.hsqldb.jdbcDriver");
                
-               con = DriverManager.getConnection("jdbc:hsqldb:file:C:\\Users\\bran\\Documents\\ProyectoPrestamil\\SistemaFinanciera\\server3\\BD","Financiera",""); 
+               con = DriverManager.getConnection("jdbc:hsqldb:file:C:\\Users\\EDUARDO\\Documents\\NetBeansProjects\\SistemaFinanciera\\server3\\BD","Financiera",""); 
                System.out.println("En linea");
             }catch(Exception ex){
                 System.out.println("Fuera de linea"+ex);
