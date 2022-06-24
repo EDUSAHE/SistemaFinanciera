@@ -10,34 +10,26 @@ package Almacenamiento.Entity;
  */
 public class Deuda {
     int IdDeuda;
-    int Idmulta;
-    int IdPago;
+    int IdDeudor;
     int IdModalidad;
     float TotalPrestamo;
     float Restante;
-
+    
+    
     public int getIdDeuda() {
-        return Idmulta;
+        return IdDeuda;
     }
 
-    public void seIdDeuda(int IdDeuda) {
+    public void setIdDeuda(int IdDeuda) {
         this.IdDeuda = IdDeuda;
     }
-    
-    public int getIdmulta() {
-        return Idmulta;
+
+    public int getIdDeudor() {
+        return IdDeudor;
     }
 
-    public void setIdmulta(int Idmulta) {
-        this.Idmulta = Idmulta;
-    }
-
-    public int getIdPago() {
-        return IdPago;
-    }
-
-    public void setIdPago(int IdPago) {
-        this.IdPago = IdPago;
+    public void setIdDeudor(int IdDeudor) {
+        this.IdDeudor = IdDeudor;
     }
 
     public int getIdModalidad() {
@@ -63,4 +55,7 @@ public class Deuda {
     public void setRestante(float Restante) {
         this.Restante = Restante;
     }
+
+
+   
 }

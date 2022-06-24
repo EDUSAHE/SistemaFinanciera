@@ -9,8 +9,18 @@ package Almacenamiento.Entity;
  * @author bran
  */
 public class Multa {
+    int IdDeudor;
     String Fecha;
     float Monto;
+
+    public int getIdDeudor() {
+        return IdDeudor;
+    }
+
+    public void setIdDeudor(int IdDeudor) {
+        this.IdDeudor = IdDeudor;
+    }
+
     public String getFecha() {
         return Fecha;
     }
@@ -26,5 +36,8 @@ public class Multa {
     public void setMonto(float Monto) {
         this.Monto = Monto;
     }
+  
+    
+    
    
 }

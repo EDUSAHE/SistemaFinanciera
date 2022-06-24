@@ -73,13 +73,13 @@ public class ControllerAval {
        
        
         //Crear Aval con el metodo POST
-        public  ResultSet CrearAval(String Nombre,String ApellidosP,String ApellidoM,String Direccion,String TelefonoCelular,String TelefonoCasa,String DireccionEmpleo,String Referencia){
+        public  ResultSet CrearAval(int IdDeudor,String Nombre,String ApellidosP,String ApellidoM,String Direccion,String TelefonoCelular,String TelefonoCasa,String DireccionEmpleo,String Referencia){
            Conexion conexion =new Conexion();
             Connection con = conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement("INSERT INTO AVAL (Nombre,ApellidosP,ApellidoM,Direccion,TelefonoCelular,TelefonoCasa,DireccionEmpleo,Referencia) VALUES(?,?,?,?,?,?,?,?)");
+               PreparedStatement ps= con.prepareStatement("INSERT INTO AVAL (Nombre,ApellidosP,ApellidoM,Direccion,TelefonoCelular,TelefonoCasa,DireccionEmpleo,Referencia,IdDeudor) VALUES(?,?,?,?,?,?,?,?,?)");
                ps.setString(1,Nombre);
                ps.setString(2,ApellidosP);
                ps.setString(3,ApellidoM);
@@ -88,6 +88,7 @@ public class ControllerAval {
                ps.setString(6,TelefonoCasa);
                ps.setString(7,DireccionEmpleo);
                ps.setString(8,Referencia);
+               ps.setInt(9,IdDeudor);
                
                int res=ps.executeUpdate();
                
@@ -116,13 +117,13 @@ public class ControllerAval {
         
         
         //Actualizar Aval con el metodo POST
-        public  int ActualizarAval(int IdAval,String Nombre,String ApellidosP,String ApellidoM,String Direccion,String TelefonoCelular,String TelefonoCasa,String DireccionEmpleo,String Referencia){
+        public  int ActualizarAval(int IdAval,int IdDeudor,String Nombre,String ApellidosP,String ApellidoM,String Direccion,String TelefonoCelular,String TelefonoCasa,String DireccionEmpleo,String Referencia){
            Conexion conexion =new Conexion();
             Connection con = conexion.conectar();
            
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement("UPDATE Aval SET Nombre=?,ApellidosP=?,ApellidoM=?,Direccion=?,TelefonoCelular=?,TelefonoCasa=?,DireccionEmpleo=?,Referencia=?  WHERE IdAval=?");
+               PreparedStatement ps= con.prepareStatement("UPDATE Aval SET Nombre=?,ApellidosP=?,ApellidoM=?,Direccion=?,TelefonoCelular=?,TelefonoCasa=?,DireccionEmpleo=?,Referencia=? ,IdDeudor=? WHERE IdAval=?");
      
                ps.setString(1,Nombre);
                ps.setString(2,ApellidosP);
@@ -132,6 +133,7 @@ public class ControllerAval {
                ps.setString(6,TelefonoCasa);
                ps.setString(7,DireccionEmpleo);
                ps.setString(8,Referencia);
+               ps.setInt(9,IdDeudor);
                ps.setInt(9,IdAval);
                
                int res=ps.executeUpdate();
