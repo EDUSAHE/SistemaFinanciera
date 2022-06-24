@@ -13,7 +13,7 @@ import java.sql.SQLException;
  * @author EDUARDO
  */
 public class ControlInicioSesion {
-    
+     private Boundary API = new Boundary();
         //retorna idTipoUsuario
         public int AccesoSistema(String username,String password){
               
@@ -22,17 +22,15 @@ public class ControlInicioSesion {
     
         //Retorna id del Usuario
        public int verificarDatosInicio(String usarname,String password){
-           Boundary boundary= new Boundary();
            int resultado;
-           resultado=boundary.Login(usarname, password);
+           resultado=API.Login(usarname, password);
            return resultado;
        }
        
        //Datos del empleado 
        public Usuario ObtenerInformacionUsuario(int idUsuario) throws SQLException{
            Usuario usuario= new Usuario();
-           Boundary boundary = new Boundary();
-           usuario = boundary.ListOneUsuario(idUsuario);
+           usuario = API.ListOneUsuario(idUsuario);
            return usuario;
        }
 

@@ -36,7 +36,7 @@
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="panelTabla" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
@@ -159,32 +159,34 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="NombreUsuario" alignment="0" min="-2" pref="69" max="-2" attributes="0"/>
-                              <Component id="NombreUsuario1" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="Apellido" pref="93" max="32767" attributes="0"/>
-                              <Component id="NombreU" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="NombreUsuario3" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Component id="NombreUsuario2" min="-2" pref="54" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="4" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="8" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="Correo" min="-2" pref="91" max="-2" attributes="0"/>
-                              <Component id="Horario" min="-2" pref="91" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="Horario" min="-2" pref="157" max="-2" attributes="0"/>
+                              <Component id="Correo" alignment="1" min="-2" pref="157" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="28" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="NombreUsuario" alignment="0" min="-2" pref="69" max="-2" attributes="0"/>
+                              <Component id="NombreUsuario1" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="Apellido" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
+                              <Component id="NombreU" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -207,9 +209,9 @@
                       <Component id="Correo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="NombreUsuario2" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="Horario" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="NombreUsuario2" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="Horario" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="60" max="32767" attributes="0"/>
               </Group>
@@ -241,6 +243,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="jTextField1"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NombreUActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="Apellido">
           <Properties>

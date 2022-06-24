@@ -76,42 +76,29 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="labelApellidoPat" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelApellidoMat" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelDireccion" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelTelefono" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelReferencia" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="labelReferencia" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="labelNombre" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="fieldNombre" min="-2" pref="356" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="labelApellidoPat" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="fieldApellidoPat" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="labelDireccion" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                          <Component id="fieldApellidoMat" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="labelTelefono" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="fieldTelefono" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="labelApellidoMat" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="fieldDireccion" min="-2" pref="334" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="fieldTelefono" max="32767" attributes="0"/>
+                      <Component id="fieldApellidoMat" max="32767" attributes="0"/>
+                      <Component id="fieldDireccion" max="32767" attributes="0"/>
+                      <Component id="fieldNombre" max="32767" attributes="0"/>
+                      <Component id="fieldApellidoPat" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="195" max="32767" attributes="0"/>
                   <Component id="botonNuevoAval" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
               </Group>
