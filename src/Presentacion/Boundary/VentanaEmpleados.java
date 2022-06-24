@@ -32,7 +32,6 @@ public class VentanaEmpleados extends javax.swing.JFrame {
     private GridBagConstraints gridB = new GridBagConstraints();
     private final JFrame estaVentana = this;
     private Usuario usuarioTemp = new Usuario();
-    private JDialog ventana = new JDialog();
     private GridBagConstraints gbc = new GridBagConstraints();
     private int contador = 0;
     /**
@@ -153,7 +152,7 @@ public class VentanaEmpleados extends javax.swing.JFrame {
 
     private void botonNuevoEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoEmpleadoActionPerformed
         // TODO add your handling code here:
-        MostrarFormularioNuevoEmpleado(ventana);
+        MostrarFormularioNuevoEmpleado();
         
     }//GEN-LAST:event_botonNuevoEmpleadoActionPerformed
 
@@ -184,7 +183,7 @@ public class VentanaEmpleados extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the orm */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VentanaEmpleados();
@@ -228,6 +227,7 @@ public class VentanaEmpleados extends javax.swing.JFrame {
 
         //Creamos el TextArea
         textPanel = new JTextArea(tempStr);
+        textPanel.setEditable(false);
         textPanel.setSize(new Dimension(200,150));
         
         //Acciones Botones
@@ -237,7 +237,7 @@ public class VentanaEmpleados extends javax.swing.JFrame {
                 //Si le da click a editar mandaremos a llamar el metodo de editar
                 //BRANDON Mandar a llamar el formulario pasale id como segundo parametro y ahi dentro del metodo busca al empleado
                 int idUsuario = 0;
-                MostrarFormularioEdicionEmpleado(ventana,0);
+                MostrarFormularioEdicionEmpleado(0);
             }
         });
 
@@ -368,7 +368,8 @@ public class VentanaEmpleados extends javax.swing.JFrame {
         modalAlerta.setVisible(true);
     }
     
-    private void MostrarFormularioNuevoEmpleado(JDialog modalFormulario){
+    private void MostrarFormularioNuevoEmpleado(){
+        JDialog modalFormulario = new JDialog();
         //Va a devolver un tipo de clase para la base de datos por lo mientras lo dejare en void
         JTextField nombreEmpleado, apellidoMat, apellidoPat, cargo, horario, usuario;
         JLabel nombreLabel, apellidoMatLabel, apellidoPatLabel, cargoLabel, horarioLabel, usuarioLabel, contraseñaLabel;
@@ -470,7 +471,8 @@ public class VentanaEmpleados extends javax.swing.JFrame {
         modalFormulario.setVisible(true);
     } 
     
-    protected void MostrarFormularioEdicionEmpleado(JDialog modalFormulario, int idUsuario) {
+    protected void MostrarFormularioEdicionEmpleado(int idUsuario) {
+        JDialog modalFormulario = new JDialog();
         //Va a devolver un tipo de clase para la base de datos por lo mientras lo dejare en void
         JTextField nombreEmpleado, apellidoMat, apellidoPat, cargo, horario, usuario;
         JLabel nombreLabel, apellidoMatLabel, apellidoPatLabel, cargoLabel, horarioLabel, usuarioLabel, contraseñaLabel;

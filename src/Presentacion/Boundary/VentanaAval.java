@@ -23,6 +23,7 @@ public class VentanaAval extends javax.swing.JFrame {
         super("Nuevo aval");
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         MostrarFormularioVacioAval();
     }
 
@@ -197,10 +198,11 @@ public class VentanaAval extends javax.swing.JFrame {
         avalTemp.setTelefonoCelular(fieldTelefono.getText());
         avalTemp.setReferencia(fieldReferencia.getText());
         
+        //Manda a llamar al metodo para subir a la base de datos
         if(1 == 1){
-            
+            //Manda a llamar a la alerat de creado
+            ConfirmacionCrearAval();
         }else{
-
 
         }
     }//GEN-LAST:event_botonNuevoAvalActionPerformed
@@ -253,13 +255,12 @@ public class VentanaAval extends javax.swing.JFrame {
         fieldReferencia.setText(avalModificar.getReferencia());
     }
 
-    private int MostrarCancelarAval(){
+    private void MostrarCancelarAval(){
         String textoAlerta = "¿Estas seguro de que quieres cancelar?";
         int resultadoOpcion;
         
         resultadoOpcion = JOptionPane.showConfirmDialog(null, textoAlerta , "Selecciona una opción", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         
-        return resultadoOpcion;
     }
     
     private void ConfirmacionCrearAval(){
