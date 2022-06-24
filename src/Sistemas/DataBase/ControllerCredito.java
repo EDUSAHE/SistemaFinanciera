@@ -41,7 +41,32 @@ public class ControllerCredito {
             return rs;
        }
        
+       //lista Creditos de un cliente 
        
+       public ResultSet ListCreditosByCliente(int IdCliente){
+               Conexion conexion =new Conexion();
+           Connection con =  conexion.conectar();
+           ResultSet rs = null;
+           try{
+               //escribimos la consulta en sql
+               PreparedStatement ps= con.prepareStatement(" SELECT * FROM Credito WHERE IdCliente=?");
+                ps.setInt(1,IdCliente);
+                 rs=ps.executeQuery();
+
+           }catch(Exception ex){
+               
+               System.err.println("Error "+ex);
+           }finally{
+                try{
+                    con.close();
+                }catch(Exception ex){
+                    
+                }
+               
+           }
+            return rs;
+           
+       }
 
         //Consultar todas las Creditos
         public  ResultSet ListCreditos(){
