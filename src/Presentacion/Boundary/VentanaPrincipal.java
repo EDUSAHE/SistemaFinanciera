@@ -30,6 +30,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         super("Creditos Financiera");   
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
         //La funcion Iniciar Muestra los datos del Usuario s
         iniciar();
@@ -240,7 +241,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void botonPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPerfilActionPerformed
         // TODO add your handling code here:
-        
+        new VentanaPerfil();
     }//GEN-LAST:event_botonPerfilActionPerformed
 
     private void ApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApellidoActionPerformed

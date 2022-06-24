@@ -14,6 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -42,6 +44,7 @@ public class VentanaClientes extends javax.swing.JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         usuarioTemp.setNombre("Prueba");
         usuarioTemp.setApellidoP("Apellido");
         usuarioTemp.setApellidoM("Materno");
@@ -369,38 +372,36 @@ public class VentanaClientes extends javax.swing.JFrame {
         modalCliente.add(referenciaLabel);
         modalCliente.add(referencia);
 
-//        //Accion del boton
-//        subirCliente.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                //Sacamos los inputs de los Fields
-//                referenciaTemp.setNombre(nombreEmpleado.getText());
-//                referenciaTemp.setApellidoM(apellidoMat.getText());
-//                referenciaTemp.setApellidoP(apellidoPat.getText());
-//
-//                //Sacamos la contraseña y la transformamos a string
-//                temporal = String.valueOf(contraseña.getPassword());
-//                referenciaTemp.setPassword(temporal);
-//                referenciaTemp.setreferencia(referencia.getText());
-//
-//                System.out.println(referenciaTemp.getNombre());
-//                System.out.println(referenciaTemp.getApellidoP());
-//                System.out.println(referenciaTemp.getApellidoM());
-//                System.out.println(referenciaTemp.getreferencia());
-//                System.out.println(referenciaTemp.getPassword());
-//
-//                if(apiSQL.Insertarreferencia(0, referenciaTemp.getNombre(), referenciaTemp.getApellidoP(), referenciaTemp.getApellidoP(), referenciaTemp.getreferencia(), referenciaTemp.getPassword()) == 1){
-//                    MostrarConfirmacionDeCreacion();
-//                }else{
-//                    MostrarErrorEmpleadoExistente();
-//                }
-//                
-//            }
-//        });
+        //Accion del boton
+        subirCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Sacamos los textos de los formularios 
+                // Ponlo en la clase que ocupes para la consultas
+                nombreEmpleado.getText();
+                apellidoMat.getText();
+                apellidoPat.getText();
+                direccion.getText();
+                telefono.getText();
+                referencia.getText();
+                
+                //Si retorna bien alerta de creacion si no de error
+                if(1 == 1){
+                    ConfirmacionCliente();
+                }else{
+                    MostrarErrorCiente();
+                }
+            }
+        });
 
-        if(modalCliente.getDefaultCloseOperation() == 2){
-            MostrarCancelarCliente();
-        }
+        modalCliente.addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e){                
+                if(MostrarCancelarCliente() == JOptionPane.YES_OPTION){
+                    e.getWindow().dispose();
+                }
+            }
+        });
         modalCliente.add(subirCliente);
         modalCliente.setVisible(true);
     }
@@ -466,34 +467,28 @@ public class VentanaClientes extends javax.swing.JFrame {
         modalCliente.add(referenciaLabel);
         modalCliente.add(referencia);
 
-//        //Accion del boton
-//        subirCliente.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                //Sacamos los inputs de los Fields
-//                referenciaTemp.setNombre(nombreEmpleado.getText());
-//                referenciaTemp.setApellidoM(apellidoMat.getText());
-//                referenciaTemp.setApellidoP(apellidoPat.getText());
-//
-//                //Sacamos la contraseña y la transformamos a string
-//                temporal = String.valueOf(contraseña.getPassword());
-//                referenciaTemp.setPassword(temporal);
-//                referenciaTemp.setreferencia(referencia.getText());
-//
-//                System.out.println(referenciaTemp.getNombre());
-//                System.out.println(referenciaTemp.getApellidoP());
-//                System.out.println(referenciaTemp.getApellidoM());
-//                System.out.println(referenciaTemp.getreferencia());
-//                System.out.println(referenciaTemp.getPassword());
-//
-//                if(apiSQL.Insertarreferencia(0, referenciaTemp.getNombre(), referenciaTemp.getApellidoP(), referenciaTemp.getApellidoP(), referenciaTemp.getreferencia(), referenciaTemp.getPassword()) == 1){
-//                    MostrarConfirmacionDeCreacion();
-//                }else{
-//                    MostrarErrorEmpleadoExistente();
-//                }
-//                
-//            }
-//        });
+        //Accion del boton
+        subirCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Sacamos los textos de los formularios 
+                // Ponlo en la clase que ocupes para la consultas
+                nombreEmpleado.getText();
+                apellidoMat.getText();
+                apellidoPat.getText();
+                direccion.getText();
+                telefono.getText();
+                referencia.getText();
+                
+                //Si retorna bien alerta de creacion si no de error
+                if(1 == 1){
+                    ConfirmacionCliente();
+                }else{
+                    MostrarErrorCiente();
+                }
+            }
+        });
+
 
         if(modalCliente.getDefaultCloseOperation() == 2){
             MostrarCancelarCliente();
@@ -502,13 +497,13 @@ public class VentanaClientes extends javax.swing.JFrame {
         modalCliente.setVisible(true);
     }
     
-    private void MostrarCancelarCliente(){
-        String textoAlerta = "¿Estas seguro de cancelar?";
-
-        JOptionPane alertaCancelado = new JOptionPane(textoAlerta,JOptionPane.QUESTION_MESSAGE,JOptionPane.YES_NO_OPTION);
-        JDialog modalAlerta = alertaCancelado.createDialog("Alerta cancelar");
-        modalAlerta.setAlwaysOnTop(true);
-        modalAlerta.setVisible(true);
+    private int MostrarCancelarCliente(){
+        String textoAlerta = "¿Estas seguro de que quieres cancelar?";
+        int resultadoOpcion;
+        
+        resultadoOpcion = JOptionPane.showConfirmDialog(null, textoAlerta , "Selecciona una opción", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        
+        return resultadoOpcion;
     }
     
     private void MostrarErrorCiente(){

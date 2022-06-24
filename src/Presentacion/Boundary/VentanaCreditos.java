@@ -38,8 +38,10 @@ public class VentanaCreditos extends javax.swing.JFrame {
         super("Creditos");
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setResizable(false);
         MostrarListadoCreditosCliente();
+       
     }
 
     /**
