@@ -78,7 +78,7 @@ public class ControllerCliente {
                ps.setString(4,Direccion);
                ps.setString(5,Telefono);
                ps.setString(6,DireccionCliente);
-               ps.setString(6,Referencia);
+               ps.setString(7,Referencia);
               
                int res=ps.executeUpdate();
                

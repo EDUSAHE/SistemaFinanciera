@@ -26,6 +26,11 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import ReglasNegocio.Control.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -36,10 +41,11 @@ public class VentanaClientes extends javax.swing.JFrame {
     private GridBagConstraints gbc = new GridBagConstraints();
     private Usuario usuarioTemp = new Usuario();
     private int contador = 0;
+    ControlClientes API = new ControlClientes();
     /**
      * Creates new form VentanaClientes
      */
-    public VentanaClientes() {
+    public VentanaClientes() throws SQLException {
         super("Clientes");
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -63,8 +69,6 @@ public class VentanaClientes extends javax.swing.JFrame {
     private void initComponents() {
 
         logoEmpresa = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        paneBusqueda = new javax.swing.JTextPane();
         botonNuevoCliente = new javax.swing.JButton();
         labelClientes = new javax.swing.JLabel();
         panelClientes = new javax.swing.JScrollPane();
@@ -72,9 +76,6 @@ public class VentanaClientes extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         logoEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/prestamilIcono.png"))); // NOI18N
-
-        paneBusqueda.setFont(new java.awt.Font("Rubik", 0, 12)); // NOI18N
-        jScrollPane2.setViewportView(paneBusqueda);
 
         botonNuevoCliente.setFont(new java.awt.Font("Rubik", 1, 12)); // NOI18N
         botonNuevoCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/NuevoCliente.png"))); // NOI18N
@@ -101,36 +102,27 @@ public class VentanaClientes extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(logoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                                .addComponent(botonNuevoCliente))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(164, 164, 164)
-                                .addComponent(labelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addGap(164, 164, 164)
+                        .addComponent(labelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                        .addComponent(botonNuevoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(labelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(logoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(botonNuevoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botonNuevoCliente)
+                            .addComponent(logoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         pack();
@@ -171,24 +163,44 @@ public class VentanaClientes extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaClientes();
+                try {
+                    new VentanaClientes();
+                } catch (SQLException ex) {
+                    Logger.getLogger(VentanaClientes.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
     
-   private JPanel CreaPanelInformacion(Usuario usuarioTemp){
+   private JPanel CreaPanelInformacion(ResultSet clientes) throws SQLException{
         JPanel resultado = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        JTextArea textPanel;
+        JTextArea textPanel = null;
         ImageIcon iconoEditar, iconoEliminar;
-        JButton botonEditar, botonEliminar;
+        JButton botonEditar = null, botonEliminar = null;
         String tempStr = "";
+        int IdCliente =clientes.getInt("IdCliente");
+        String Nombre = clientes.getString("Nombre");
+        String ApellidoP =clientes.getString("ApellidoP");
+        String ApellidoM = clientes.getString("ApellidoM");
+        String Direccion = clientes.getString("Direccion");
+        String Telefono = clientes.getString("Telefono");
+        String Referencia = clientes.getString("Referencia");
+    // System.out.println(IdCliente);
+        
         
         //Creamos el texto que tendra el textArea
-        tempStr += "Nombre(s): " + usuarioTemp.getNombre() + "\n";
-        tempStr += "Apellido Pat. : " + usuarioTemp.getApellidoP() + "\n";
-        tempStr += "Apellido Mat. : " + usuarioTemp.getApellidoM() + "\n";
-        tempStr += "Numero de telefono: " + usuarioTemp.getHorario()+ "\n";
+        tempStr += "Nombre(s): " + clientes.getString("Nombre") + "\n";
+        tempStr += "Apellido Pat. : " + clientes.getString("ApellidoP") + "\n";
+        tempStr += "Apellido Mat. : " + clientes.getString("ApellidoM") + "\n";
+        tempStr += "Numero de telefono: " + clientes.getString("Telefono")+ "\n";
+        
+        
+        
+        
+        
+        
+        
         
         //Creamos los iconos y reescalamos
         iconoEditar = new ImageIcon("/Imagenes/Editar.png");
@@ -215,25 +227,70 @@ public class VentanaClientes extends javax.swing.JFrame {
         textPanel.setEditable(false);
         textPanel.setSize(new Dimension(200,150));
         
+        
+        
         //Acciones Botones
+       
+        
+        
         botonEditar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev){
                 //Si le da click a editar mandaremos a llamar el metodo de editar
-                //BRANDON Mandar a llamar el formulario pasale id como segundo parametro y ahi dentro del metodo busca al empleado
-                int idUsuario = 0;
-                MostrarFormularioCliente(0);
+                //BRANDON Mandar a llamar el formulario pasale id como segundo parametro y ahi dentro del metodo busca al empleado  
+                MostrarFormularioCliente(IdCliente, Nombre,ApellidoP ,ApellidoM,Direccion, Telefono,Referencia);
             }
         });
 
+       
+        
+        
         botonEliminar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev){
-               /*Eliminamos de la base de datos*/
-               //BRANDON: Eliminar de la base
-               EliminarCliente();
+               
+                    /*Eliminamos de la base de datos*/
+                    //BRANDON: Eliminar de la base
+                    //int idCliente=clientes.getInt("IdCliente");
+                     EliminarCliente();
+                     int resultado;
+                      
+                    resultado=API.deleteCliente(IdCliente);
+                    if(resultado==1){
+                        
+                             //PONER UNA ALERTA DE ELIMINADO CORRECTAMENTE y actualizar el listado 
+
+                        
+                    }else{
+                        //PONER UNA ALERTA DE ELIMINACIONFALLIDAT
+                    }
+                   
+                    
+             
+                 
+               
             }
         });
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         //Añadimos al panel
         gbc.gridx = 0;
@@ -278,10 +335,16 @@ public class VentanaClientes extends javax.swing.JFrame {
         return resultado;
     }
     
-    private void MostrarListadoClientes(){
+    private void MostrarListadoClientes() throws SQLException{
         initComponents();
+         ResultSet clientes;
+        clientes = API.obtenerTodosClientes();
+        
         JPanel pruebaPanel = new JPanel(new GridBagLayout());
-        pruebaPanel = AgregarNuevoPanel(pruebaPanel,usuarioTemp);
+        
+        while(clientes.next()){
+        pruebaPanel = AgregarNuevoPanel(pruebaPanel,clientes);
+        }
         pruebaPanel.addMouseListener(new MouseAdapter(){
             public void mousePressed(MouseEvent me){
                 //Mandamos a llamar a una ventana Aval
@@ -293,7 +356,7 @@ public class VentanaClientes extends javax.swing.JFrame {
         panelClientes.updateUI();
     }
     
-    private JPanel AgregarNuevoPanel(JPanel panelRetorno, Usuario usuarioPanel){
+    private JPanel AgregarNuevoPanel(JPanel panelRetorno, ResultSet clientes) throws SQLException{
         //Para agregar un nuevo usaremos una variable contador para las columnas asi sera reactivo
         // La columna de las y en la variable gbc son los renglones
         gbc.gridx = 0;
@@ -302,8 +365,14 @@ public class VentanaClientes extends javax.swing.JFrame {
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         contador++;
+        //Agregamos el el String de Clientes 
         
-        panelRetorno.add(CreaPanelInformacion(usuarioTemp),gbc);
+       
+        
+        
+        
+        
+        panelRetorno.add(CreaPanelInformacion(clientes),gbc);
         
         //Regresamos as los valores default para el siguiente
         gbc.fill = GridBagConstraints.NONE;
@@ -314,7 +383,7 @@ public class VentanaClientes extends javax.swing.JFrame {
     private void MostrarFormularioVacioCliente(){
         JDialog modalCliente = new JDialog();
         //Va a devolver un tipo de clase para la base de datos por lo mientras lo dejare en void
-        JTextField nombreEmpleado, apellidoMat, apellidoPat, direccion, telefono, referencia;
+        JTextField nombreCliente, apellidoMat, apellidoPat, direccion, telefono, referencia;
         JLabel nombreLabel, apellidoMatLabel, apellidoPatLabel, direccionLabel, telefonoLabel, referenciaLabel;
         JButton subirCliente;
         ImageIcon iconoBotonSubir;
@@ -335,7 +404,7 @@ public class VentanaClientes extends javax.swing.JFrame {
         referenciaLabel = new JLabel("Referencia:");
 
         //Creamos los Fields
-        nombreEmpleado = new JTextField();
+        nombreCliente = new JTextField();
         apellidoMat = new JTextField();
         apellidoPat = new JTextField();
         direccion = new JTextField();
@@ -344,7 +413,7 @@ public class VentanaClientes extends javax.swing.JFrame {
         
         //Definimos el tamaño de los Fields
         Dimension estandarTamaño = new Dimension(120,30); 
-        nombreEmpleado.setSize(estandarTamaño);
+        nombreCliente.setSize(estandarTamaño);
         apellidoMat.setSize(estandarTamaño);
         apellidoPat.setSize(estandarTamaño);
         direccion.setSize(estandarTamaño);
@@ -360,7 +429,7 @@ public class VentanaClientes extends javax.swing.JFrame {
 
         //Agregamos al Panel
         modalCliente.add(nombreLabel);
-        modalCliente.add(nombreEmpleado);
+        modalCliente.add(nombreCliente);
         modalCliente.add(apellidoMatLabel);
         modalCliente.add(apellidoMat);
         modalCliente.add(apellidoPatLabel);
@@ -378,16 +447,19 @@ public class VentanaClientes extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 //Sacamos los textos de los formularios 
                 // Ponlo en la clase que ocupes para la consultas
-                nombreEmpleado.getText();
+                nombreCliente.getText();
                 apellidoMat.getText();
                 apellidoPat.getText();
                 direccion.getText();
                 telefono.getText();
                 referencia.getText();
                 
+                
                 //Si retorna bien alerta de creacion si no de error
-                if(1 == 1){
+                if(API.addCliente(nombreCliente.getText(), apellidoPat.getText(), apellidoMat.getText(), direccion.getText(),  telefono.getText(), direccion.getText(), referencia.getText()) == 1){
                     ConfirmacionCliente();
+                    modalCliente.dispatchEvent(new WindowEvent(modalCliente, WindowEvent.WINDOW_CLOSING));
+                    
                 }else{
                     MostrarErrorCiente();
                 }
@@ -406,7 +478,7 @@ public class VentanaClientes extends javax.swing.JFrame {
         modalCliente.setVisible(true);
     }
     
-    private void MostrarFormularioCliente( int idUsuario){
+    private void MostrarFormularioCliente( int idCliente,String nombreCliente,String ApellidoP,String ApellidoM,String Direccion,String Telefono,String Referencia){
         JDialog modalCliente = new JDialog();
         //Va a devolver un tipo de clase para la base de datos por lo mientras lo dejare en void
         JTextField nombreEmpleado, apellidoMat, apellidoPat, direccion, telefono, referencia;
@@ -430,12 +502,16 @@ public class VentanaClientes extends javax.swing.JFrame {
         referenciaLabel = new JLabel("Referencia:");
 
         //Creamos los Fields
-        nombreEmpleado = new JTextField();
-        apellidoMat = new JTextField();
-        apellidoPat = new JTextField();
-        direccion = new JTextField();
-        telefono = new JTextField();
-        referencia = new JTextField(); 
+        nombreEmpleado = new JTextField(nombreCliente);
+        apellidoMat = new JTextField(ApellidoM);
+        apellidoPat = new JTextField(ApellidoP);
+        direccion = new JTextField(Direccion);
+        telefono = new JTextField(Telefono);
+        referencia = new JTextField(Referencia); 
+        
+        
+        
+        
         
         //Definimos el tamaño de los Fields
         Dimension estandarTamaño = new Dimension(120,30); 
@@ -481,7 +557,7 @@ public class VentanaClientes extends javax.swing.JFrame {
                 referencia.getText();
                 
                 //Si retorna bien alerta de creacion si no de error
-                if(1 == 1){
+                if( API.ActualizarCliente(idCliente, nombreEmpleado.getText(), apellidoPat.getText(), apellidoMat.getText(),  direccion.getText(), telefono.getText(),  direccion.getText(),  referencia.getText())==1){
                     ConfirmacionCliente();
                 }else{
                     MostrarErrorCiente();
@@ -542,10 +618,8 @@ public class VentanaClientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonNuevoCliente;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelClientes;
     private javax.swing.JLabel logoEmpresa;
-    private javax.swing.JTextPane paneBusqueda;
     private javax.swing.JScrollPane panelClientes;
     // End of variables declaration//GEN-END:variables
 }
