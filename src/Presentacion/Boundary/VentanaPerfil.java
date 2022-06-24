@@ -51,7 +51,7 @@ public class VentanaPerfil extends javax.swing.JFrame {
         fieldContraseña = new javax.swing.JPasswordField();
         botonModificarDatos = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         logoEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/prestamilIcono.png"))); // NOI18N
 
