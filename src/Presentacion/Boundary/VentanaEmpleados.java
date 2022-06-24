@@ -56,7 +56,7 @@ public class VentanaEmpleados extends javax.swing.JFrame {
         botonNuevoEmpleado = new javax.swing.JButton();
         panelEmpleados = new javax.swing.JScrollPane();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Empleados");
         setSize(new java.awt.Dimension(1002, 680));
 

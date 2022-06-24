@@ -47,7 +47,7 @@ public class VentanaClientes extends javax.swing.JFrame {
         labelClientes = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         logoEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/prestamilIcono.png"))); // NOI18N
 
@@ -56,7 +56,7 @@ public class VentanaClientes extends javax.swing.JFrame {
 
         botonNuevoCliente.setFont(new java.awt.Font("Rubik", 1, 12)); // NOI18N
         botonNuevoCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/NuevoCliente.png"))); // NOI18N
-        botonNuevoCliente.setText("Agregar Ciente");
+        botonNuevoCliente.setText("Agregar Cliente");
         botonNuevoCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonNuevoClienteActionPerformed(evt);
@@ -83,7 +83,7 @@ public class VentanaClientes extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                                 .addComponent(botonNuevoCliente))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(164, 164, 164)
