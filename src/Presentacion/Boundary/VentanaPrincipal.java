@@ -31,7 +31,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         initComponents();
-        //iniciar();
+        //La funcion Iniciar Muestra los datos del Usuario s
+        iniciar();
     }
 
     /**
