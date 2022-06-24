@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Presentacion.Boundary;
-
+import  ReglasNegocio.Control.*;
 import Almacenamiento.Entity.Usuario;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -15,6 +15,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
@@ -36,10 +40,12 @@ public class VentanaEmpleados extends javax.swing.JFrame {
     private Usuario usuarioTemp = new Usuario();
     private GridBagConstraints gbc = new GridBagConstraints();
     private int contador = 0;
+    private ControlEmpleados API = new ControlEmpleados();
     /**
      * Creates new form VentanaEmpleados
+     * @throws java.sql.SQLException
      */
-    public VentanaEmpleados() {
+    public VentanaEmpleados() throws SQLException {
         super("Empleados");
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -189,24 +195,48 @@ public class VentanaEmpleados extends javax.swing.JFrame {
         /* Create and display the orm */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaEmpleados();
+                try {
+                    new VentanaEmpleados();
+                } catch (SQLException ex) {
+                    Logger.getLogger(VentanaEmpleados.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
     
-    private JPanel CreaPanelInformacion(Usuario usuarioTemp){
+    private JPanel CreaPanelInformacion(ResultSet empleados) throws SQLException{
+        
+        
         JPanel resultado = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         JTextArea textPanel;
         ImageIcon iconoEditar, iconoEliminar;
         JButton botonEditar, botonEliminar;
         String tempStr = "";
-        
+        int idUsuario =empleados.getInt("IdUsuario");
+        String Nombre=empleados.getString("Nombre");
+        int IdTIpoUsuario=empleados.getInt("IdTIpoUsuario");
+        String ApellidoP=empleados.getString("ApellidoP");
+        String ApellidoM=empleados.getString("ApellidoM");
+        String Usuario=empleados.getString("Usuario");
+        String Password=empleados.getString("Password");
+        String Horario=empleados.getString("Horario");
+                        
+                        
+                        
+             
+                        
+        Usuario usuario = new Usuario();
+        usuario.setIdUsuario(empleados.getInt("IdUsuario"));
+        usuario.setNombre(empleados.getString("Nombre"));
+        usuario.setApellidoP(empleados.getString("ApellidoP"));
+        usuario.setApellidoM(empleados.getString("ApellidoM"));
+        usuario.setUsuario(empleados.getString("Usuario"));
         //Creamos el texto que tendra el textArea
-        tempStr += "Nombre(s): " + usuarioTemp.getNombre() + "\n";
-        tempStr += "Apellido Pat. : " + usuarioTemp.getApellidoP() + "\n";
-        tempStr += "Apellido Mat. : " + usuarioTemp.getApellidoM() + "\n";
-        tempStr += "Usuario: " + usuarioTemp.getUsuario() + "\n";
+        tempStr += "Nombre(s): " + empleados.getString("Nombre") + "\n";
+        tempStr += "Apellido Pat. : " + empleados.getString("ApellidoP") + "\n";
+        tempStr += "Apellido Mat. : " + empleados.getString("ApellidoM") + "\n";
+        tempStr += "Usuario: " + empleados.getString("Usuario") + "\n";
         
         //Creamos los iconos y reescalamos
         iconoEditar = new ImageIcon("/Imagenes/Editar.png");
@@ -239,8 +269,7 @@ public class VentanaEmpleados extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent ev){
                 //Si le da click a editar mandaremos a llamar el metodo de editar
                 //BRANDON Mandar a llamar el formulario pasale id como segundo parametro y ahi dentro del metodo busca al empleado
-                int idUsuario = 0;
-                MostrarFormularioEdicionEmpleado(0);
+                MostrarFormularioEdicionEmpleado( idUsuario, IdTIpoUsuario, Nombre, ApellidoP, ApellidoM, Usuario, Password, Horario);
             }
         });
 
@@ -249,9 +278,10 @@ public class VentanaEmpleados extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent ev){
                /*Eliminamos de la base de datos*/
                //BRANDON: Eliminar de la base
-               if(MostrarConfirmacionDeEliminacion() == 1){
-                   //Aqui mandas a eliminar
-               }
+               int Respuesta;
+               MostrarConfirmacionDeEliminacion();
+               Respuesta = API.deleteUsuario(idUsuario);
+               System.out.println(idUsuario);
             }
         });
         
@@ -298,17 +328,27 @@ public class VentanaEmpleados extends javax.swing.JFrame {
         return resultado;
     }
     
-    private void MostrarListadoEmpleados(){
+    private void MostrarListadoEmpleados() throws SQLException{
         initComponents();
         JPanel pruebaPanel = new JPanel(new GridBagLayout());
-        
-        pruebaPanel = AgregarNuevoPanel(pruebaPanel,usuarioTemp);
-        pruebaPanel.updateUI();
+         ResultSet empleados;
+         empleados= API.obtenerTodosUsuarios();
+         
+         
+         
+         while(empleados.next()){
+                    pruebaPanel = AgregarNuevoPanel(pruebaPanel,empleados);
+         
+         }
+       
+         
+         
+         pruebaPanel.updateUI();
         panelEmpleados.setViewportView(pruebaPanel);
         panelEmpleados.updateUI();
     }
     
-    private JPanel AgregarNuevoPanel(JPanel panelRetorno, Usuario usuarioPanel){
+    private JPanel AgregarNuevoPanel(JPanel panelRetorno, ResultSet empleados) throws SQLException{
         //Para agregar un nuevo usaremos una variable contador para las columnas asi sera reactivo
         // La columna de las y en la variable gbc son los renglones
         gbc.gridx = 0;
@@ -318,7 +358,7 @@ public class VentanaEmpleados extends javax.swing.JFrame {
         gbc.fill = GridBagConstraints.BOTH;
         contador++;
         
-        panelRetorno.add(CreaPanelInformacion(usuarioTemp),gbc);
+        panelRetorno.add(CreaPanelInformacion(empleados),gbc);
         
         //Regresamos as los valores default para el siguiente
         gbc.fill = GridBagConstraints.NONE;
@@ -438,34 +478,35 @@ public class VentanaEmpleados extends javax.swing.JFrame {
         modalFormulario.add(usuarioLabel);
         modalFormulario.add(usuario);
 
-//        //Accion del boton
-//        subirEmpleado.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                //Sacamos los inputs de los Fields
-//                usuarioTemp.setNombre(nombreEmpleado.getText());
-//                usuarioTemp.setApellidoM(apellidoMat.getText());
-//                usuarioTemp.setApellidoP(apellidoPat.getText());
-//
-//                //Sacamos la contraseña y la transformamos a string
-//                temporal = String.valueOf(contraseña.getPassword());
-//                usuarioTemp.setPassword(temporal);
-//                usuarioTemp.setUsuario(usuario.getText());
-//
-//                System.out.println(usuarioTemp.getNombre());
-//                System.out.println(usuarioTemp.getApellidoP());
-//                System.out.println(usuarioTemp.getApellidoM());
-//                System.out.println(usuarioTemp.getUsuario());
-//                System.out.println(usuarioTemp.getPassword());
-//
-//                if(apiSQL.InsertarUsuario(0, usuarioTemp.getNombre(), usuarioTemp.getApellidoP(), usuarioTemp.getApellidoP(), usuarioTemp.getUsuario(), usuarioTemp.getPassword()) == 1){
-//                    MostrarConfirmacionDeCreacion();
-//                }else{
-//                    MostrarErrorEmpleadoExistente();
-//                }
-//                
-//            }
-//        });
+        //Accion del boton
+        subirEmpleado.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Sacamos los inputs de los Fields
+                usuarioTemp.setNombre(nombreEmpleado.getText());
+                usuarioTemp.setApellidoM(apellidoMat.getText());
+                usuarioTemp.setApellidoP(apellidoPat.getText());
+                 usuarioTemp.setHorario(horario.getText());
+                //Sacamos la contraseña y la transformamos a string
+                String temporal = String.valueOf(contraseña.getPassword());
+                usuarioTemp.setPassword(temporal);
+                usuarioTemp.setUsuario(usuario.getText());
+
+                System.out.println(usuarioTemp.getNombre());
+                System.out.println(usuarioTemp.getApellidoP());
+                System.out.println(usuarioTemp.getApellidoM());
+                System.out.println(usuarioTemp.getUsuario());
+                System.out.println(usuarioTemp.getPassword());
+                System.out.println(usuarioTemp.getHorario());
+
+                if(API.addUsuario(1, usuarioTemp.getNombre(), usuarioTemp.getApellidoP(), usuarioTemp.getApellidoM(), usuarioTemp.getUsuario(), usuarioTemp.getPassword(), usuarioTemp.getHorario()) == 1){
+                    MostrarConfirmacionDeCreacion();
+                }else{
+                    MostrarErrorEmpleadoExistente();
+                }
+               
+            }
+        });
 
         modalFormulario.addWindowListener(new WindowAdapter(){
             @Override
@@ -479,7 +520,7 @@ public class VentanaEmpleados extends javax.swing.JFrame {
         modalFormulario.setVisible(true);
     } 
     
-    protected void MostrarFormularioEdicionEmpleado(int idUsuario) {
+    protected void MostrarFormularioEdicionEmpleado(int IdUsuario,int IdTIpoUsuario,String Nombre,String ApellidoP,String ApellidoM,String Usuario,String Password,String Horario) {
         JDialog modalFormulario = new JDialog();
         //Va a devolver un tipo de clase para la base de datos por lo mientras lo dejare en void
         JTextField nombreEmpleado, apellidoMat, apellidoPat, cargo, horario, usuario;
@@ -497,21 +538,21 @@ public class VentanaEmpleados extends javax.swing.JFrame {
 
         //Creamos los labels
         nombreLabel = new JLabel("Nombre(s):");
-        apellidoMatLabel = new JLabel("Apellido Materno:");
         apellidoPatLabel = new JLabel("Apellido Paterno:");
+        apellidoMatLabel = new JLabel("Apellido Materno:");
         cargoLabel = new JLabel("Cargo:");
         horarioLabel = new JLabel("Horario:");
         usuarioLabel = new JLabel("Usuario:");
         contraseñaLabel = new JLabel("Contraseña:");
 
         //Creamos los Fields
-        nombreEmpleado = new JTextField();
-        apellidoMat = new JTextField();
-        apellidoPat = new JTextField();
-        cargo = new JTextField();
-        horario = new JTextField();
-        contraseña = new JPasswordField();
-        usuario = new JTextField(); 
+        nombreEmpleado = new JTextField(Nombre);
+        apellidoMat = new JTextField(ApellidoM);
+        apellidoPat = new JTextField(ApellidoP);
+        cargo = new JTextField(IdTIpoUsuario);
+        horario = new JTextField(Horario);
+        contraseña = new JPasswordField(Password);
+        usuario = new JTextField(Usuario); 
 
         //Definimos el tamaño de los Fields
         Dimension estandarTamaño = new Dimension(120,30); 
@@ -546,30 +587,23 @@ public class VentanaEmpleados extends javax.swing.JFrame {
         modalFormulario.add(usuarioLabel);
         modalFormulario.add(usuario);
 
-//        //Accion del boton
-//        subirEmpleado.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                //Sacamos los inputs de los Fields
-//                usuarioTemp.setNombre(nombreEmpleado.getText());
-//                usuarioTemp.setApellidoM(apellidoMat.getText());
-//                usuarioTemp.setApellidoP(apellidoPat.getText());
-//
-//                //Sacamos la contraseña y la transformamos a string
-//                temporal = String.valueOf(contraseña.getPassword());
-//                usuarioTemp.setPassword(temporal);
-//                usuarioTemp.setUsuario(usuario.getText());
+        System.out.print(IdUsuario);
+      //Accion del boton
+      subirEmpleado.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+             
 //
 //                
-//                if(apiSQL.ActualizarUsuario(idUsuario, 0, usuarioTemp.getNombre(), usuarioTemp.getApellidoP(), usuarioTemp.getApellidoM(), usuarioTemp.getUsuario(), usuarioTemp.getPassword()) == 1){
-//                    MostrarConfirmacionDeCambios();
-//                }else{
-//                    MostrarErrorEmpleadoExistente();
-//                }
+            if(API.ActualizarUsuario(IdUsuario, '0', nombreEmpleado.getText(), apellidoPat.getText(), apellidoMat.getText(), usuario.getText(), contraseña.getText(), horario.getText()) == 1){
+                  MostrarConfirmacionDeCambios();
+              }else{
+                  MostrarErrorEmpleadoExistente();
+               }
 //               
-//                
-//            }
-//        });
+//   
+          }
+          });
         modalFormulario.add(subirEmpleado);
         modalFormulario.setVisible(true);
         if(modalFormulario.getDefaultCloseOperation() == 2){

@@ -397,8 +397,8 @@ public class VentanaClientes extends javax.swing.JFrame {
 
         //Creamos los labels
         nombreLabel = new JLabel("Nombre(s):");
-        apellidoMatLabel = new JLabel("Apellido Materno:");
         apellidoPatLabel = new JLabel("Apellido Paterno:");
+        apellidoMatLabel = new JLabel("Apellido Materno:");
         direccionLabel = new JLabel("direccion:");
         telefonoLabel = new JLabel("Telefono:");
         referenciaLabel = new JLabel("Referencia:");
@@ -430,10 +430,10 @@ public class VentanaClientes extends javax.swing.JFrame {
         //Agregamos al Panel
         modalCliente.add(nombreLabel);
         modalCliente.add(nombreCliente);
-        modalCliente.add(apellidoMatLabel);
-        modalCliente.add(apellidoMat);
         modalCliente.add(apellidoPatLabel);
         modalCliente.add(apellidoPat);
+        modalCliente.add(apellidoMatLabel);
+        modalCliente.add(apellidoMat);
         modalCliente.add(direccionLabel);
         modalCliente.add(direccion);
         modalCliente.add(telefonoLabel);

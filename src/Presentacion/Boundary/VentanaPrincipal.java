@@ -225,13 +225,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void botonEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEmpleadosActionPerformed
 
-       new VentanaEmpleados();
+        try {
+            new VentanaEmpleados();
+        } catch (SQLException ex) {
+            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonEmpleadosActionPerformed
 
     private void botonClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonClientesActionPerformed
-        // TODO add your handling code here:
-           
-        new VentanaClientes();
+        try {
+            // TODO add your handling code here:
+
+            new VentanaClientes();
+        } catch (SQLException ex) {
+            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonClientesActionPerformed
 
     private void botonCreditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCreditosActionPerformed

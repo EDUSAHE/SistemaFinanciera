@@ -109,7 +109,7 @@ public class ControllerUsuario {
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement("UPDATE USUARIO SET IdTIpoUsuario=?,Nombre=?,ApellidoP=?,ApellidoM=?,Usuario=?,Password=?,Horario=? WHERE IdUsuario = ?");
+               PreparedStatement ps= con.prepareStatement("UPDATE Usuario SET IdTIpoUsuario=?,Nombre=?,ApellidoP=?,ApellidoM=?,Usuario=?,Password=?,Horario=? WHERE IdUsuario = ?");
                ps.setInt(1,IdTIpoUsuario);
                ps.setString(2,Nombre);
                ps.setString(3,ApellidoP);

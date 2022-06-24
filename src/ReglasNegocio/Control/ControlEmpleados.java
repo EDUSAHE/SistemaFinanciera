@@ -41,8 +41,9 @@ public class ControlEmpleados {
        return datosusuario;
     }
     
-    public int ActualizarUsuario(Usuario DatosActualizados){
-        return API.ActualizarUsuario(DatosActualizados.getIdUsuario(), DatosActualizados.getIdTIpoUsuario(), DatosActualizados.getNombre(), DatosActualizados.getApellidoP(), DatosActualizados.getApellidoM(), DatosActualizados.getUsuario(), DatosActualizados.getUsuario(), DatosActualizados.getHorario());
+    public int ActualizarUsuario(int IdUsuario,int IdTIpoUsuario,String Nombre,String ApellidoP,String ApellidoM,String Usuario,String Password,String Horario){
+        int Result;
+        return Result= API.ActualizarUsuario(IdTIpoUsuario, IdTIpoUsuario, Nombre, ApellidoP, ApellidoM, Usuario, Password, Horario);
     }
     
     public ResultSet obtenerTodosUsuarios(){

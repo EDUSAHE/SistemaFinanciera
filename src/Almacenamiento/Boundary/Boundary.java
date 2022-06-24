@@ -473,13 +473,13 @@ public class Boundary {
             //nuevo.InsertarMulta("12/10/12", 2);
             //nuevo.InsertarPago("12/4", 3);
             //nuevo.InsertarTipoUsuario("TipoUsuario");
-            //Usuario nuevoUsuario = new Usuario();
+           // Usuario nuevoUsuario = new Usuario();
             //nuevoUsuario.setNombre("Brandon");
             //nuevoUsuario.setApellidoP("Ortiz");
             //nuevoUsuario.setApellidoM("Rojas");
             //nuevoUsuario.setUsuario("brandon@gmail.com");
             //nuevoUsuario.setPassword("brandon");
-           // nuevoUsuario.setHorario("5:00am-5:00pm");
+            //nuevoUsuario.setHorario("5:00am-5:00pm");
             //nuevoUsuario.setIdTIpoUsuario(0);
             
             //nuevo.InsertarUsuario(nuevoUsuario);
@@ -491,7 +491,7 @@ public class Boundary {
             // nuevo.ActualizarMulta(0, "Actualizada", 100);
             //nuevo.ActualizarPago(0, "ActualizaPago", 100);
             //nuevo.ActualizarTipoUsuario(0, "NombrewTipoActualizado");
-           // nuevo.ActualizarUsuario(0, 0, "brandon", "Ortiz", "Rojas", "brandon@gmail.com", "brandon","8:00am-5:00pm");
+          // nuevo.ActualizarUsuario(7, 0, "", "", "", "admin", "admin", "");
         //LISTAR LISTONE
             //USUARIO
                 //Usuario UsuarioRespuesta= new Usuario();
