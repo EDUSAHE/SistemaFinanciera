@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Sistemas.DataBase;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,21 +13,23 @@ import javax.swing.JOptionPane;
  *
  * @author bran
  */
-public class ControllerDeudor {
-           //-----------------------------------------------------------------------------METODOS-Deudor-------------------------------------------------------------------------------\\
-        //Consultar todas los Deudores
-        public  ResultSet consultarDeudores(){
+public class ControllerCredito {
+           //-----------------------------------------------------------------------------METODOS-Credito-------------------------------------------------------------------------------\\
+       
+       //consultar un solo Credito con id
+       public  ResultSet ListOneCredito(int IdCredito){
            Conexion conexion =new Conexion();
            Connection con =  conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement(" select * FROM DEUDOR ");
-               rs=ps.executeQuery();
-               
+               PreparedStatement ps= con.prepareStatement(" SELECT * FROM Credito WHERE IdCredito=?");
+                ps.setInt(1,IdCredito);
+                 rs=ps.executeQuery();
+
            }catch(Exception ex){
                
-               System.err.println("Error"+ex);
+               System.err.println("Error "+ex);
            }finally{
                 try{
                     con.close();
@@ -37,16 +40,42 @@ public class ControllerDeudor {
            }
             return rs;
        }
-        
-        //Consultar todas los Deudor
-        public  ResultSet consultarDeudor(int IdDeudor){
-           Conexion conexion =new Conexion();
+       
+       //lista Creditos de un cliente 
+       
+       public ResultSet ListCreditosByCliente(int IdCliente){
+               Conexion conexion =new Conexion();
            Connection con =  conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement(" select * FROM DEUDOR WHERE IdDeudor=?");
-               ps.setInt(1, IdDeudor);
+               PreparedStatement ps= con.prepareStatement(" SELECT * FROM Credito WHERE IdCliente=?");
+                ps.setInt(1,IdCliente);
+                 rs=ps.executeQuery();
+
+           }catch(Exception ex){
+               
+               System.err.println("Error "+ex);
+           }finally{
+                try{
+                    con.close();
+                }catch(Exception ex){
+                    
+                }
+               
+           }
+            return rs;
+           
+       }
+
+        //Consultar todas las Creditos
+        public  ResultSet ListCreditos(){
+           Conexion conexion =new Conexion();
+           Connection con = conexion.conectar();
+           ResultSet rs = null;
+           try{
+               //escribimos la consulta en sql
+               PreparedStatement ps= con.prepareStatement(" select * FROM Credito ");
                rs=ps.executeQuery();
                
            }catch(Exception ex){
@@ -63,32 +92,27 @@ public class ControllerDeudor {
             return rs;
        }
        
-       
-        //Crear Deudor con el metodo POST
-        public  int CrearDeudor(String Nombre,String ApellidoP,String ApellidoM,String Direccion,String Telefono,String DireccionEmpleado,String Referencia){
-            Conexion conexion =new Conexion();
-            Connection con =  conexion.conectar();
+       //Crear Credito con el metodo POST
+        public  int CrearCredito(int IdCliente,int IdModalidad,float TotalPrestamo,float Restante){
+           Conexion conexion =new Conexion();
+           Connection con =  conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement("INSERT INTO DEUDOR (Nombre,ApellidoP,ApellidoM,Direccion,Telefono,DireccionEmpleado,Referencia) VALUES(?,?,?,?,?,?,?)");
-               ps.setString(1,Nombre);
-               ps.setString(2,ApellidoP);
-               ps.setString(3,ApellidoM);
-               ps.setString(4,Direccion);
-               ps.setString(5,Telefono);
-               ps.setString(6,DireccionEmpleado);
-               ps.setString(6,Referencia);
-              
+               PreparedStatement ps= con.prepareStatement("INSERT INTO Credito (IdCliente,IdModalidad,TotalPrestamo,Restante) VALUES(?,?,?,?)");
+               ps.setFloat(1,IdCliente);
+               ps.setFloat(2,IdModalidad);
+               ps.setFloat(3,TotalPrestamo);
+               ps.setFloat(4,Restante);
                int res=ps.executeUpdate();
                
                if(res> 0){
                   
-                JOptionPane.showMessageDialog(null," Deudor creado correctamente");
+             
                 return 1;
                 
                }else{
-                   JOptionPane.showMessageDialog(null,"Error al crear");
+                  
                    return 0;
                }
  
@@ -105,26 +129,29 @@ public class ControllerDeudor {
            }
             return 0;
        }
-       
-        //Elimina Deudor
-       public  int EliminarDeudor(int IdDeudor){
+      
+        
+
+        //Elimina Credito
+       public  int EliminarCredito(int IdCredito){
            Conexion conexion =new Conexion();
            Connection con =  conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement(" DELETE FROM DEUDOR WHERE IdDeudor=?");
-                ps.setInt(1,IdDeudor);
+               PreparedStatement ps= con.prepareStatement(" DELETE FROM Credito WHERE IdCredito=?");
+                ps.setInt(1,IdCredito);
                 int res=ps.executeUpdate();
                
                if(res> 0){
                   
-                JOptionPane.showMessageDialog(null,"Deudor Eliminada Correctamente");
+                
                 return 1;
                 
                }else{
-                   JOptionPane.showMessageDialog(null,"Error al Eliminar");
+                  
                    return 0;
+                          
                }
  
            }catch(Exception ex){
@@ -141,33 +168,30 @@ public class ControllerDeudor {
             return 0;
        }
        
-     
-       //Actualizar Deudor con el metodo UPDAte
-        public  int ActualizarDeudor(String Nombre,String ApellidoP,String ApellidoM,String Direccion,String Telefono,String DireccionEmpleado,String Referencia,int IdDeudor){
-            Conexion conexion =new Conexion();
-            Connection con =  conexion.conectar();
+       
+       //Actualizar Credito con el metodo Update
+        public  int ActualizarCredito(int IdCredito,int IdCliente,int IdModalidad,float TotalPrestamo,float Restante){
+           Conexion conexion =new Conexion();
+           Connection con =  conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement("UPDATE  DEUDOR set Nombre=?,ApellidoP=?,ApellidoM=?,Direccion=?,Telefono=?,DireccionEmpleado=?,Referencia=? WHERE IdDeudor =? ");
-               ps.setString(1,Nombre);
-               ps.setString(2,ApellidoP);
-               ps.setString(3,ApellidoM);
-               ps.setString(4,Direccion);
-               ps.setString(5,Telefono);
-               ps.setString(6,DireccionEmpleado);
-               ps.setString(7,Referencia);
-               ps.setInt(8, IdDeudor);
-              
+               PreparedStatement ps= con.prepareStatement("UPDATE Credito SET IdCliente=?,IdModalidad=?,TotalPrestamo =?,Restante =?  WHERE IdCredito=?");
+                ps.setInt(1,IdCliente);
+               ps.setInt(2,IdModalidad);
+               ps.setFloat(3,TotalPrestamo);
+               ps.setFloat(4,Restante);
+               ps.setInt(5, IdCredito);
                int res=ps.executeUpdate();
                
                if(res> 0){
                   
-                JOptionPane.showMessageDialog(null," Deudor Actualizado correctamente");
+               
                 return 1;
                 
                }else{
-                   JOptionPane.showMessageDialog(null,"Error al Actualizar");
+                
+                   
                    return 0;
                }
  
@@ -184,6 +208,6 @@ public class ControllerDeudor {
            }
             return 0;
        }
-       
+      
        
 }

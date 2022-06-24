@@ -8,28 +8,28 @@ package Almacenamiento.Entity;
  *
  * @author bran
  */
-public class Deuda {
-    int IdDeuda;
-    int IdDeudor;
+public class Credito {
+    int IdCredito;
+    int IdCliente;
     int IdModalidad;
     float TotalPrestamo;
     float Restante;
     
     
-    public int getIdDeuda() {
-        return IdDeuda;
+    public int getIdCredito() {
+        return IdCredito;
     }
 
-    public void setIdDeuda(int IdDeuda) {
-        this.IdDeuda = IdDeuda;
+    public void setIdCredito(int IdCredito) {
+        this.IdCredito = IdCredito;
     }
 
-    public int getIdDeudor() {
-        return IdDeudor;
+    public int getIdCliente() {
+        return IdCliente;
     }
 
-    public void setIdDeudor(int IdDeudor) {
-        this.IdDeudor = IdDeudor;
+    public void setIdCliente(int IdCliente) {
+        this.IdCliente = IdCliente;
     }
 
     public int getIdModalidad() {

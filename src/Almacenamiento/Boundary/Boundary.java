@@ -18,9 +18,9 @@ public class Boundary {
     
     
     //CREA UN NUEVO AVAL  (Retorno: si  fue eliminado con exito=1  de lo contrario = 0)
-    public  ResultSet InsertarAval(int IdDeudor,String Nombre,String ApellidosP,String ApellidoM,String Direccion,String TelefonoCelular,String TelefonoCasa,String DireccionEmpleo,String Referencia){
+    public  ResultSet InsertarAval(int IdCliente,String Nombre,String ApellidosP,String ApellidoM,String Direccion,String TelefonoCelular,String TelefonoCasa,String DireccionEmpleo,String Referencia){
                 ControllerAval nuevo = new ControllerAval();
-                nuevo.CrearAval(IdDeudor, Nombre, ApellidosP, ApellidoM, Direccion, TelefonoCelular, TelefonoCasa, DireccionEmpleo, Referencia);
+                nuevo.CrearAval(IdCliente, Nombre, ApellidosP, ApellidoM, Direccion, TelefonoCelular, TelefonoCasa, DireccionEmpleo, Referencia);
                 return null;       
     }
     
@@ -34,10 +34,10 @@ public class Boundary {
     }
     
     //ACTUALIZAR AVAL   (Retorno: si  fue actualizado con exito=1  de lo contrario = 0)
-    public int ActualizarAval(int IdDeudor,int idAval,String Nombre,String ApellidosP,String ApellidoM,String Direccion,String TelefonoCelular,String TelefonoCasa,String DireccionEmpleo,String Referencia){
+    public int ActualizarAval(int IdCliente,int idAval,String Nombre,String ApellidosP,String ApellidoM,String Direccion,String TelefonoCelular,String TelefonoCasa,String DireccionEmpleo,String Referencia){
         int resultado;
         ControllerAval nuevo = new ControllerAval();
-        resultado=nuevo.ActualizarAval(idAval, IdDeudor, Nombre, ApellidosP, ApellidoM, Direccion, TelefonoCelular, TelefonoCasa, DireccionEmpleo, Referencia);
+        resultado=nuevo.ActualizarAval(idAval, IdCliente, Nombre, ApellidosP, ApellidoM, Direccion, TelefonoCelular, TelefonoCasa, DireccionEmpleo, Referencia);
         return resultado;
     }
     
@@ -48,7 +48,7 @@ public class Boundary {
         ControllerAval nuevo = new ControllerAval();
         AvalR=nuevo.ConsultarAval(idAval);
         while(AvalR.next()){
-             AvalResultado.setIdDeudor(AvalR.getInt("IdDeudor"));
+              AvalResultado.setIdCliente(AvalR.getInt("IdCliente"));
               AvalResultado.setNombre(AvalR.getString("Nombre"));
               AvalResultado.setApellidosP(AvalR.getString("ApellidosP"));
               AvalResultado.setApellidoM(AvalR.getString("ApellidoM"));
@@ -74,115 +74,124 @@ public class Boundary {
    
     
     
-     //------------------------------------------------------------------------METODOS-DEUDA--------------------------------------------------------------------------
+     //------------------------------------------------------------------------METODOS-Credito--------------------------------------------------------------------------
     
     
         
-    //CREA UN NUEVO DEUDA   (Retorno: si  fue eliminado con exito=1  de lo contrario = 0)
-    public  int InsertarDeuda(int IdDeudor,int IdModalidad,float TotalPrestamo,float Restante){
+    //CREA UN NUEVO Credito   (Retorno: si  fue eliminado con exito=1  de lo contrario = 0)
+    public  int InsertarCredito(int IdCliente,int IdModalidad,float TotalPrestamo,float Restante){
         int resultado;
-        ControllerDeuda nuevo=new ControllerDeuda();
-        resultado=nuevo.CrearDeuda(IdDeudor, IdModalidad, TotalPrestamo, Restante);
+        ControllerCredito nuevo=new ControllerCredito();
+        resultado=nuevo.CrearCredito(IdCliente, IdModalidad, TotalPrestamo, Restante);
          
         return resultado;       
     }
     
-    //ELIMINAR DEUDA    (Retorno: si  fue eliminado con exito=1  de lo contrario = 0)
-    public int EliminarDeuda(int idDeuda){
-        int resultado;
-        ControllerDeuda nuevo= new ControllerDeuda();
-        resultado= nuevo.EliminarDeuda(idDeuda);
+    
+    //Listar Creditos de un cliente 
+    public ResultSet ListCreditosByCliente(int IdCliente){
+        ResultSet resultado;
+        ControllerCredito nuevo= new ControllerCredito();
+        resultado= nuevo.ListCreditosByCliente(IdCliente);
         return resultado;
     }
     
-    //ACTUALIZAR DEUDA   (Retorno: si  fue actualizado con exito=1  de lo contrario = 0)
-    public int ActualizarDeuda(int IdDeuda,int IdDeudor,int IdModalidad,float TotalPrestamo,float Restante){
+    //ELIMINAR Credito    (Retorno: si  fue eliminado con exito=1  de lo contrario = 0)
+    public int EliminarCredito(int idCredito){
         int resultado;
-        ControllerDeuda nuevo = new ControllerDeuda();
-        resultado =nuevo.ActualizarDeuda(IdDeuda, IdDeudor, IdModalidad, TotalPrestamo, Restante);
+        ControllerCredito nuevo= new ControllerCredito();
+        resultado= nuevo.EliminarCredito(idCredito);
         return resultado;
     }
     
-    //OBTER INFORMACION DE UN DEUDA 
-    public Deuda ListOneDeuda(int idAval) throws SQLException{
+    //ACTUALIZAR Credito   (Retorno: si  fue actualizado con exito=1  de lo contrario = 0)
+    public int ActualizarCredito(int IdCredito,int IdCliente,int IdModalidad,float TotalPrestamo,float Restante){
+        int resultado;
+        ControllerCredito nuevo = new ControllerCredito();
+        resultado =nuevo.ActualizarCredito(IdCredito, IdCliente, IdModalidad, TotalPrestamo, Restante);
+        return resultado;
+    }
+    
+    //OBTER INFORMACION DE UN Credito 
+    public Credito ListOneCredito(int idCredito) throws SQLException{
         ResultSet Deuda;
-         Deuda DeudaR = new Deuda();
-        ControllerDeuda nuevo= new ControllerDeuda();
-        Deuda=nuevo.ListOneDeuda(idAval);
+         Credito Credito = new Credito();
+        ControllerCredito nuevo= new ControllerCredito();
+        Deuda=nuevo.ListOneCredito(idCredito);
         while(Deuda.next()){
                           
-              DeudaR.setIdDeuda(Deuda.getInt("IdDeuda"));
-              DeudaR.setIdDeudor(Deuda.getInt("IdDeudor"));
-              DeudaR.setIdModalidad(Deuda.getInt("IdModalidad"));
-              DeudaR.setTotalPrestamo(Deuda.getFloat("TotalPrestamo"));
-              DeudaR.setRestante(Deuda.getFloat("Restante"));
+              Credito.setIdCredito(Deuda.getInt("IdCredito"));
+              Credito.setIdCliente(Deuda.getInt("IdCliente"));
+              Credito.setIdModalidad(Deuda.getInt("IdModalidad"));
+              Credito.setTotalPrestamo(Deuda.getFloat("TotalPrestamo"));
+              Credito.setRestante(Deuda.getFloat("Restante"));
         }
         
-        return DeudaR;
+        return Credito;
     }
     
-    //OBTENER INFORMACION DE DEUDA
-    public ResultSet ListDeudas(){
-        ResultSet Deudas;
-        ControllerDeuda nuevo =new ControllerDeuda();
-        Deudas=nuevo.ListDeudas();
-        return Deudas;
+    //OBTENER INFORMACION DE Creditos
+    public ResultSet ListCreditos(){
+        ResultSet Creditos;
+        ControllerCredito nuevo =new ControllerCredito();
+        Creditos=nuevo.ListCreditos();
+        return Creditos;
     }
    
-     //------------------------------------------------------------------------METODOS-DEUDOR--------------------------------------------------------------------------
+     //------------------------------------------------------------------------METODOS-Cliente--------------------------------------------------------------------------
 
             
-    //CREA UN NUEVO DEUDOR   (Retorno: si  fue eliminado con exito=1  de lo contrario = 0)
-    public  int InsertarDeudor(String Nombre,String ApellidoP,String ApellidoM,String Direccion,String Telefono,String DireccionEmpleado,String Referencia){
+    //CREA UN NUEVO Cliente   (Retorno: si  fue eliminado con exito=1  de lo contrario = 0)
+    public  int InsertarCliente(String Nombre,String ApellidoP,String ApellidoM,String Direccion,String Telefono,String DireccionCliente,String Referencia){
         int resultado;
-        ControllerDeudor nuevo = new ControllerDeudor();
-        resultado = nuevo.CrearDeudor(Nombre, ApellidoP, ApellidoM, Direccion, Telefono, DireccionEmpleado, Referencia);
+        ControllerCliente nuevo = new ControllerCliente();
+        resultado = nuevo.CrearCliente(Nombre, ApellidoP, ApellidoM, Direccion, Telefono, DireccionCliente, Referencia);
         return resultado;       
     }
     
     //ELIMINAR DEUDOR    (Retorno: si  fue eliminado con exito=1  de lo contrario = 0)
-    public int EliminarDeudor(int idDeudor){
+    public int EliminarCliente(int idCliente){
         int resultado;
-        ControllerDeudor nuevo = new ControllerDeudor();
-       resultado = nuevo.EliminarDeudor(idDeudor);
+        ControllerCliente nuevo = new ControllerCliente();
+       resultado = nuevo.EliminarCliente(idCliente);
         return resultado;
     }
     
     //ACTUALIZAR DEUDOR  (Retorno: si  fue actualizado con exito=1  de lo contrario = 0)
-    public int ActualizarDeudor(int IdDeudor,String Nombre,String ApellidoP,String ApellidoM,String Direccion,String Telefono,String DireccionEmpleado,String Referencia){
+    public int ActualizarCliente(int IdCliente,String Nombre,String ApellidoP,String ApellidoM,String Direccion,String Telefono,String DireccionCliente,String Referencia){
        int resultado;
-       ControllerDeudor nuevo = new ControllerDeudor();
-       resultado = nuevo.ActualizarDeudor(Nombre, ApellidoP, ApellidoM, Direccion, Telefono, DireccionEmpleado, Referencia, IdDeudor);
+       ControllerCliente nuevo = new ControllerCliente();
+       resultado = nuevo.ActualizarCliente(Nombre, ApellidoP, ApellidoM, Direccion, Telefono, DireccionCliente, Referencia, IdCliente);
         return resultado;
     }
     
     //OBTER INFORMACION DE UN DEUDOR 
-    public Deudor ListOneDeudor(int idDeudor) throws SQLException{
-       ControllerDeudor nuevo = new ControllerDeudor();
-       Deudor DeudoresR = new Deudor();
+    public Cliente ListOneCliente(int idCliente) throws SQLException{
+       ControllerCliente nuevo = new ControllerCliente();
+       Cliente ClienteR = new Cliente();
        ResultSet Deudor;
-       Deudor = nuevo.consultarDeudores();
+       Deudor = nuevo.consultarCliente(idCliente);
            while(Deudor.next()){
-              DeudoresR.setNombre(Deudor.getString("Nombre"));
-              DeudoresR.setApellidoP(Deudor.getString("ApellidoP"));
-              DeudoresR.setApellidoM(Deudor.getString("ApellidoM"));
-              DeudoresR.setDireccion(Deudor.getString("Direccion"));
-              DeudoresR.setTelefono(Deudor.getString("Telefono"));
-              DeudoresR.setDireccionEmpleado(Deudor.getString("DireccionEmpleado"));
-              DeudoresR.setReferencia(Deudor.getString("Referencia"));
+              ClienteR.setNombre(Deudor.getString("Nombre"));
+              ClienteR.setApellidoP(Deudor.getString("ApellidoP"));
+              ClienteR.setApellidoM(Deudor.getString("ApellidoM"));
+              ClienteR.setDireccion(Deudor.getString("Direccion"));
+              ClienteR.setTelefono(Deudor.getString("Telefono"));
+              ClienteR.setDireccionEmpleado(Deudor.getString("DireccionEmpleado"));
+              ClienteR.setReferencia(Deudor.getString("Referencia"));
               
 
         }
        
-        return DeudoresR;
+        return ClienteR;
     }
     
     //OBTENER INFORMACION DE DEUDORES
-    public ResultSet ListDeudores(){
-        ResultSet Deudores;
-        ControllerDeudor nuevo = new ControllerDeudor();
-        Deudores = nuevo.consultarDeudores();
-        return Deudores;
+    public ResultSet ListClientes(){
+        ResultSet ClienteR;
+        ControllerCliente nuevo = new ControllerCliente();
+        ClienteR = nuevo.consultarClientes();
+        return ClienteR;
     }
     
  //------------------------------------------------------------------------METODOS-MODALIDAD--------------------------------------------------------------------------
@@ -238,10 +247,10 @@ public class Boundary {
      //------------------------------------------------------------------------METODOS-MULTA--------------------------------------------------------------------------
                 
     //CREA UNA NUEVA MULTA   (Retorno: si  fue eliminado con exito=1  de lo contrario = 0)
-    public  int InsertarMulta(int IdDeuda,String Fecha,int Monto){
+    public  int InsertarMulta(int IdCliente,String Fecha,int Monto){
         int resultado;
         ControllerMulta nuevo = new ControllerMulta();
-        resultado = nuevo.CrearMulta(IdDeuda, Fecha, Monto);
+        resultado = nuevo.CrearMulta(IdCliente, Fecha, Monto);
         return resultado;       
     }
     
@@ -254,19 +263,19 @@ public class Boundary {
     }
     
     //ACTUALIZAR MULTA  (Retorno: si  fue actualizado con exito=1  de lo contrario = 0)
-    public int ActualizarMulta(int IdDeuda,int IdMulta,String Fecha,int Monto){
+    public int ActualizarMulta(int IdCliente,int IdMulta,String Fecha,int Monto){
         int resultado;
         ControllerMulta nuevo = new ControllerMulta();
-        resultado = nuevo.ActualizarMulta(IdMulta, IdDeuda, Fecha, Monto);
+        resultado = nuevo.ActualizarMulta(IdMulta, IdCliente, Fecha, Monto);
         return resultado;
     }
     
     //OBTER INFORMACION DE UNA MULTA 
-    public Multa ListOneMulta(int IdDeudor) throws SQLException{
+    public Multa ListOneMulta(int IdMulta) throws SQLException{
        ResultSet Multa;
        Multa MultaR = new Multa();
        ControllerMulta nuevo = new ControllerMulta();
-       Multa = nuevo.consultarMulta(IdDeudor);
+       Multa = nuevo.consultarMulta(IdMulta);
        
        while(Multa.next()){
            MultaR.setFecha(Multa.getString("Fecha"));
@@ -288,10 +297,10 @@ public class Boundary {
     //------------------------------------------------------------------------METODOS-PAGO--------------------------------------------------------------------------
     
     //CREA UN NUEVO PAGO  (Retorno: si  fue eliminado con exito=1  de lo contrario = 0)
-    public  int InsertarPago(int IdDeuda,String Fecha,int Monto){
+    public  int InsertarPago(int IdCliente,String Fecha,int Monto){
         int resultado;
         ControllerPago nuevo =new ControllerPago();
-        resultado = nuevo.CrearPago(IdDeuda, Fecha, Monto);
+        resultado = nuevo.CrearPago(IdCliente, Fecha, Monto);
         return resultado;       
     }
     
@@ -304,10 +313,10 @@ public class Boundary {
     }
     
     //ACTUALIZAR PAGO  (Retorno: si  fue actualizado con exito=1  de lo contrario = 0)
-    public int ActualizarPago(int IdDeuda,int IdPago,String Fecha,int Monto){
+    public int ActualizarPago(int IdCliente,int IdPago,String Fecha,int Monto){
         int resultado;
         ControllerPago nuevo = new ControllerPago();
-        resultado = nuevo.ActualizarPago(IdPago, IdDeuda, Fecha, Monto);
+        resultado = nuevo.ActualizarPago(IdPago, IdCliente, Fecha, Monto);
         return resultado;
     }
     
@@ -319,6 +328,7 @@ public class Boundary {
         Pago =nuevo.consultarPagos();
          
         while(Pago.next()){
+            PagoR.setIdCliente(Pago.getInt("IdCliente"));
             PagoR.setFecha(Pago.getString("Fecha"));
             PagoR.setMonto(Pago.getInt("Pago"));
         }

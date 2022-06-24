@@ -9,7 +9,8 @@ package Almacenamiento.Entity;
  * @author bran
  */
 public class Aval {
-    int IdDeudor;
+    int IdAval;
+    int IdCliente;
     String Nombre; 
     String ApellidosP;
     String ApellidoM; 
@@ -19,13 +20,20 @@ public class Aval {
     String DireccionEmpleo; 
     String Referencia; 
   
-
-    public int getIdDeudor() {
-        return IdDeudor;
+    public int getIdAval() {
+        return IdAval;
     }
 
-    public void setIdDeudor(int IdDeudor) {
-        this.IdDeudor = IdDeudor;
+    public void setIdAval(int IdAval) {
+        this.IdAval = IdAval;
+    }
+
+    public int getIdCliente() {
+        return IdCliente;
+    }
+
+    public void setIdCliente(int IdCliente) {
+        this.IdCliente = IdCliente;
     }
 
     public String getNombre() {

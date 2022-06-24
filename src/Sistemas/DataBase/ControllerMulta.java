@@ -66,16 +66,16 @@ public class ControllerMulta {
        
        
         //Crear Multa con el metodo POST
-        public  int CrearMulta(int IdDeudor,String Fecha,int Monto){
+        public  int CrearMulta(int IdCliente,String Fecha,int Monto){
            Conexion conexion =new Conexion();
             Connection con = conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement("INSERT INTO Multa (Fecha,Monto,IdDeudor) VALUES(?,?,?)");
+               PreparedStatement ps= con.prepareStatement("INSERT INTO Multa (Fecha,Monto,IdCliente) VALUES(?,?,?)");
                ps.setString(1,Fecha);
                ps.setInt(2, Monto);
-               ps.setInt(3, IdDeudor);
+               ps.setInt(3, IdCliente);
       
                
                int res=ps.executeUpdate();
@@ -139,16 +139,16 @@ public class ControllerMulta {
  
        
        //Actualiza Multa con el metodo Update
-        public  int ActualizarMulta(int IdMulta,int IdDeuda,String Fecha,int Monto){
+        public  int ActualizarMulta(int IdMulta,int IdCliente,String Fecha,int Monto){
            Conexion conexion =new Conexion();
             Connection con = conexion.conectar();
            ResultSet rs = null;
            try{
                //escribimos la consulta en sql
-               PreparedStatement ps= con.prepareStatement("UPDATE  Multa SET Fecha=?,Monto=?,IdDeuda=? WHERE IdMulta=?");
+               PreparedStatement ps= con.prepareStatement("UPDATE  Multa SET Fecha=?,Monto=?,IdCliente=? WHERE IdMulta=?");
                ps.setString(1,Fecha);
                ps.setInt(2,Monto);
-               ps.setInt(3,IdDeuda);
+               ps.setInt(3,IdCliente);
                ps.setInt(4, IdMulta);
       
                

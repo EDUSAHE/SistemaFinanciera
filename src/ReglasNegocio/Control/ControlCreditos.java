@@ -5,7 +5,7 @@
 package ReglasNegocio.Control;
 
 import Almacenamiento.Boundary.Boundary;
-import Almacenamiento.Entity.Deuda;
+import Almacenamiento.Entity.Credito;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 /**
@@ -15,28 +15,28 @@ import java.sql.ResultSet;
 public class ControlCreditos {
     private Boundary API = new Boundary();
        
-       public int addCredito(int IdDeudor,int IdModalidad,float TotalPrestamo,float Restante){
-        return API.InsertarDeuda(IdDeudor, IdModalidad, TotalPrestamo, Restante);
+       public int addCredito(int IdCredito,int IdModalidad,float TotalPrestamo,float Restante){
+        return API.InsertarCredito(IdCredito, IdModalidad, TotalPrestamo, Restante);
     }
     
-    public Deuda ObtenerDatosCredito(int IdDeuda) throws SQLException{
-        Deuda DatosCredito = new Deuda();
-       DatosCredito = API.ListOneDeuda(IdDeuda);
+    public Credito ObtenerDatosCredito(int IdCredito) throws SQLException{
+        Credito DatosCredito = new Credito();
+       DatosCredito = API.ListOneCredito(IdCredito);
        return DatosCredito;
     }
     
-    public int ActualizarCredito(int IdDeudor,int IdModalidad,float TotalPrestamo,float Restante){
-        return API.ActualizarDeuda(IdDeudor, IdDeudor, IdModalidad, TotalPrestamo, Restante);
+    public int ActualizarCredito(int IdCredito,int IdModalidad,float TotalPrestamo,float Restante){
+        return API.ActualizarCredito(IdCredito, IdCredito, IdModalidad, TotalPrestamo, Restante);
     }
     
-    public ResultSet ObtenerCreditosCliente(int idDeudor){
+    public ResultSet ObtenerCreditosCliente(int idCredito){
         ResultSet CreditosCliente;
-        CreditosCliente = API.ListDeudores();
+        CreditosCliente = API.ListCreditos();
         return CreditosCliente;
     }
     
-    public int deleteCredito(int IdDeuda){
-        return API.EliminarDeuda(IdDeuda);
+    public int deleteCredito(int IdCredito){
+        return API.EliminarCredito(IdCredito);
     }
     
     
