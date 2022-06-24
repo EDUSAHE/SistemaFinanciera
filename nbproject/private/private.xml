@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/nobls/Documents/GitHub/SistemaFinanciera/src/Presentacion/Boundary/VentanaEmpleados.java</file>
-            <file>file:/C:/Users/nobls/Documents/GitHub/SistemaFinanciera/src/Presentacion/Boundary/VentanaCreditos.java</file>
-            <file>file:/C:/Users/nobls/Documents/GitHub/SistemaFinanciera/src/Presentacion/Boundary/VentanaClientes.java</file>
+            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Almacenamiento/Entity/Deudor.java</file>
+            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/ReglasNegocio/Control/ControlInicioSesion.java</file>
+            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Presentacion/Boundary/VentanaPrincipal.java</file>
+            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Presentacion/Boundary/VentanaLogin.java</file>
+            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Almacenamiento/Boundary/Boundary.java</file>
         </group>
     </open-files>
 </project-private>

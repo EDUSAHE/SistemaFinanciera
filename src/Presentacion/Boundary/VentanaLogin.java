@@ -4,9 +4,7 @@
  */
 package Presentacion.Boundary;
 
-import Almacenamiento.Boundary.*;
-import java.awt.Image;
-import javax.swing.ImageIcon;
+import ReglasNegocio.Control.*;
 import javax.swing.JOptionPane;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -20,7 +18,7 @@ public class VentanaLogin extends javax.swing.JFrame {
     public static int idUsuario=-1;
     public static String datos="brandon";
     private final JFrame estaVentana = this;
-    private Boundary boundary = new Boundary();
+    private ControlInicioSesion verificardatosinicio = new ControlInicioSesion();
     
     /**
      * Creates new form VentanaLogin
@@ -61,6 +59,11 @@ public class VentanaLogin extends javax.swing.JFrame {
         labelUsuario1.setText("Usuario");
 
         fieldContra.setText("jPasswordField1");
+        fieldContra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldContraActionPerformed(evt);
+            }
+        });
 
         botonLogin.setFont(new java.awt.Font("Rubik", 1, 14)); // NOI18N
         botonLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Login.png"))); // NOI18N
@@ -118,7 +121,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         
           String  usuarioTemp = textUsuario.getText();
           String contraseñaTemp = fieldContra.getText();
-           prueba= boundary.Login(usuarioTemp,contraseñaTemp);
+           prueba= verificardatosinicio.verificarDatosInicio(usuarioTemp,contraseñaTemp);
         
         //Se lo mandamos a la función EnviarDatosUsuario
         //Si es verdadero manda a llamar a la ventana de Home
@@ -137,6 +140,10 @@ public class VentanaLogin extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_botonLoginActionPerformed
+
+    private void fieldContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldContraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldContraActionPerformed
 
     /**
      * @param args the command line arguments
