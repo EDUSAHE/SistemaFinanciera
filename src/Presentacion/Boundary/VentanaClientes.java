@@ -265,9 +265,8 @@ public class VentanaClientes extends javax.swing.JFrame {
                         //PONER UNA ALERTA DE ELIMINACIONFALLIDAT
                     }
                    
-                    
-             
-                 
+                    //Se cierra la ventana
+                    estaVentana.dispose();
                
             }
         });
@@ -463,17 +462,13 @@ public class VentanaClientes extends javax.swing.JFrame {
                 }else{
                     MostrarErrorCiente();
                 }
+                
+                //Cerramos la ventana
+                modalCliente.dispose();
             }
         });
 
-        modalCliente.addWindowListener(new WindowAdapter(){
-            @Override
-            public void windowClosing(WindowEvent e){                
-                if(MostrarCancelarCliente() == JOptionPane.YES_OPTION){
-                    e.getWindow().dispose();
-                }
-            }
-        });
+        
         modalCliente.add(subirCliente);
         modalCliente.setVisible(true);
     }
@@ -562,6 +557,9 @@ public class VentanaClientes extends javax.swing.JFrame {
                 }else{
                     MostrarErrorCiente();
                 }
+                
+                //Cerramos la ventana
+                modalCliente.dispose();
             }
         });
 
