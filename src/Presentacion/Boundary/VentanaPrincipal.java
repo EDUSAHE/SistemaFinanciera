@@ -107,12 +107,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         NombreUsuario3.setText("Correo");
 
-        Apellido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ApellidoActionPerformed(evt);
-            }
-        });
-
         labelGenerales.setFont(new java.awt.Font("Rubik", 0, 14)); // NOI18N
         labelGenerales.setText("Datos Generales");
         labelGenerales.setToolTipText("");
@@ -244,6 +238,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void botonCreditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCreditosActionPerformed
         // TODO add your handling code here:
+        new VentanaCreditosTabla(estaVentana,false);
         new VentanaCreditos();
     }//GEN-LAST:event_botonCreditosActionPerformed
 
@@ -251,10 +246,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         new VentanaPerfil();
     }//GEN-LAST:event_botonPerfilActionPerformed
-
-    private void ApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApellidoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ApellidoActionPerformed
     public void iniciar(){
        try {
             // TODO add your handling code here
