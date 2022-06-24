@@ -16,24 +16,31 @@ public class Usuario {
     String usuario;
     String password;
     String horario;
+    int IdTIpoUsuario;
+    int IdUsuario;
     //Constructor vacio
     public Usuario(){
+        
         this.nombre = "";
         this.apellidoP = "";
         this.apellidoM = "";
         this.usuario = "";
         this.password = "";
         this.horario="";
+        this.IdTIpoUsuario=0;
+        this.IdUsuario=0;
     }
 
     //Constructor sobrecargado con todos los campos
-    public Usuario(String nombreNuevo, String apellidoPNuevo, String apellidoMNuevo, String usuarioNuevo, String passwordNuevo,String horario){
+    public Usuario(int IdTIpoUsuario,int IdUsuario,String nombreNuevo, String apellidoPNuevo, String apellidoMNuevo, String usuarioNuevo, String passwordNuevo,String horario){
         this.nombre = nombreNuevo;
         this.apellidoP = apellidoPNuevo;
         this.apellidoM = apellidoMNuevo;
         this.usuario = usuarioNuevo;
         this.password = passwordNuevo;
         this.horario=horario;
+        this.IdTIpoUsuario=IdTIpoUsuario;
+        this.IdUsuario=IdUsuario;
     }
 
     public String getNombre() {
@@ -82,4 +89,17 @@ public class Usuario {
     public void setHorario(String Horario) {
         this.horario = Horario;
     }
+    public void setIdTIpoUsuario(int IdTIpoUsuario) {
+        this.IdTIpoUsuario = IdTIpoUsuario;
+    }
+    public void setIdUsuario(int IdUsuario) {
+        this.IdUsuario = IdUsuario;
+    }
+    public int getIdTIpoUsuario() {
+        return IdTIpoUsuario;
+    }
+    public int getIdUsuario() {
+        return IdUsuario;
+    }
+    
 }

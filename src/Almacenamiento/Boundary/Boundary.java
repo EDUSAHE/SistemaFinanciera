@@ -383,10 +383,10 @@ public class Boundary {
     
        //------------------------------------------------------------------------METODOS-USUARIO--------------------------------------------------------------------------
       //CREA UN NUEVO USUARIO  (Retorno: si  fue eliminado con exito=1  de lo contrario = 0)
-    public  int InsertarUsuario(int IdTIpoUsuario,String Nombre,String ApellidoP,String ApellidoM,String Usuario,String Password,String Horario){
+    public  int InsertarUsuario(Usuario nuevoUsuario){
         int resultado;
        ControllerUsuario nuevo = new ControllerUsuario();
-       resultado = nuevo.CrearUsuario(IdTIpoUsuario, Nombre, ApellidoP, ApellidoM, Usuario, Password,Horario);
+       resultado = nuevo.CrearUsuario(nuevoUsuario.getIdTIpoUsuario(), nuevoUsuario.getNombre(), nuevoUsuario.getApellidoP(), nuevoUsuario.getApellidoM(), nuevoUsuario.getUsuario(), nuevoUsuario.getPassword(), nuevoUsuario.getHorario());
         return resultado;       
     }
     

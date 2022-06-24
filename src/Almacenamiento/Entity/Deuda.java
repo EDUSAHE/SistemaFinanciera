@@ -9,12 +9,21 @@ package Almacenamiento.Entity;
  * @author bran
  */
 public class Deuda {
+    int IdDeuda;
     int Idmulta;
     int IdPago;
     int IdModalidad;
     float TotalPrestamo;
     float Restante;
 
+    public int getIdDeuda() {
+        return Idmulta;
+    }
+
+    public void seIdDeuda(int IdDeuda) {
+        this.IdDeuda = IdDeuda;
+    }
+    
     public int getIdmulta() {
         return Idmulta;
     }
