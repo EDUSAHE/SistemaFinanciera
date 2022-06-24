@@ -48,7 +48,7 @@ public class Boundary {
         ControllerAval nuevo = new ControllerAval();
         AvalR=nuevo.ConsultarAval(idAval);
         while(AvalR.next()){
-             AvalResultado.setIdCliente(AvalR.getInt("IdCliente"));
+              AvalResultado.setIdCliente(AvalR.getInt("IdCliente"));
               AvalResultado.setNombre(AvalR.getString("Nombre"));
               AvalResultado.setApellidosP(AvalR.getString("ApellidosP"));
               AvalResultado.setApellidoM(AvalR.getString("ApellidoM"));
