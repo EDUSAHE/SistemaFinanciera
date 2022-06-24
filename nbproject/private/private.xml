@@ -2,15 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group>
+            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Sistemas/DataBase/Conexion.java</file>
             <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Presentacion/Boundary/VentanaEmpleados.java</file>
+            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/ReglasNegocio/Control/ControlInicioSesion.java</file>
             <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Presentacion/Boundary/VentanaClientes.java</file>
             <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Presentacion/Boundary/VentanaPrincipal.java</file>
             <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Presentacion/Boundary/VentanaLogin.java</file>
+            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/Almacenamiento/Boundary/Boundary.java</file>
+            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/ReglasNegocio/Control/Especificacion%20de%20Paquete.txt</file>
+            <file>file:/C:/Users/bran/Documents/ProyectoPrestamil/SistemaFinanciera/src/ReglasNegocio/Control/ControlEmpleados.java</file>
         </group>
-=======
-        <group/>
->>>>>>> ac6cae6214990878c1034a7773b977fc15fc663e
     </open-files>
 </project-private>
